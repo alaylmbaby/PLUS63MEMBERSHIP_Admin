@@ -56,6 +56,35 @@
   .lg-dot{color:#D3D8E3}
   .lg-demo{text-align:center;font-size:11.5px;color:var(--ink3);margin-top:16px}
 
+  /* ===== 이미지 업로드 슬롯 ===== */
+  .imgslot-h{font-size:12.5px;font-weight:700;color:var(--ink)}
+  .imgslot-h .no{display:inline-flex;width:17px;height:17px;border-radius:50%;background:var(--ink);color:#fff;font-size:10.5px;font-weight:800;align-items:center;justify-content:center;margin-right:5px;vertical-align:1px}
+  .imgslot-sz{font-size:11.5px;color:var(--ink3);margin-top:2px}
+  .imgslot{margin-top:8px;aspect-ratio:4/3;border:1px dashed #C9D0DE;border-radius:12px;background:var(--surface2);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:.15s}
+  .imgslot:hover{border-color:var(--gold-soft);background:#F2F4FD}
+  .imgslot .plus{font-size:28px;font-weight:300;color:#AEB6C6;line-height:1}
+  .imgslot img{width:100%;height:100%;object-fit:cover;display:block}
+  .imgslot .del{position:absolute;top:7px;right:7px;width:24px;height:24px;border-radius:7px;border:none;background:rgba(0,0,0,.6);color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+  /* ===== 리치 텍스트 에디터 ===== */
+  .rte{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}
+  .rte-bar{display:flex;flex-wrap:wrap;gap:2px;padding:6px 8px;border-bottom:1px solid var(--line);background:var(--surface2)}
+  .rte-bar button{border:none;background:transparent;border-radius:6px;min-width:26px;height:26px;padding:0 6px;font-size:12.5px;font-family:inherit;color:var(--ink2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.12s}
+  .rte-bar button:hover{background:#E4E7EF;color:var(--ink)}
+  .rte-bar .sep{width:1px;height:16px;background:var(--line);margin:5px 4px;flex-shrink:0}
+  .rte-area{min-height:150px;max-height:340px;overflow-y:auto;padding:14px 15px;font-size:13.5px;line-height:1.7;color:var(--ink);outline:none}
+  .rte-area:empty:before{content:attr(data-ph);color:var(--ink3)}
+  .rte-area ul,.rte-area ol{padding-left:22px;margin:6px 0}
+  .rte-area hr{border:none;border-top:1px solid var(--line);margin:12px 0}
+
+  /* ===== FAQ 항목 ===== */
+  .faq-wrap{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px}
+  .faq-row{background:#fff;border:1px solid var(--line);border-radius:10px;display:flex;align-items:flex-start;gap:10px;padding:11px 13px;margin-bottom:8px}
+  .faq-row:last-child{margin-bottom:0}
+  .faq-key{font-size:16px;font-weight:800;color:var(--ink);width:22px;flex-shrink:0;line-height:1.5}
+  .faq-row input,.faq-row textarea{flex:1;border:none;outline:none;font-family:inherit;font-size:13.5px;color:var(--ink);background:transparent;resize:vertical;line-height:1.6}
+  .faq-row input::placeholder,.faq-row textarea::placeholder{color:var(--ink3)}
+
   /* ===== TOPBAR ===== */
   .topbar{height:76px;flex-shrink:0;background:var(--bg);display:flex;align-items:center;gap:16px;padding:0 26px}
   .wm{display:flex;align-items:center;gap:10px;flex-shrink:0}
@@ -792,7 +821,7 @@
           <div class="filter-grid">
             <div class="ff"><label>프로모션명</label><input id="pqName" class="finput" placeholder="포함 검색"></div>
             <div class="ff"><label>매장</label><input id="pqStore" class="finput" placeholder="매장명 포함"></div>
-            <div class="ff"><label>혜택 유형</label><select id="pqType" class="fsel"><option value="all">전체</option><option>할인</option><option>증정/사은품</option><option>1+1</option><option>세트/패키지</option><option>체험/무료</option><option>기타</option></select></div>
+            <div class="ff"><label>프로모션 유형</label><select id="pqType" class="fsel"><option value="all">전체</option><option value="coupon">할인 쿠폰</option><option value="promo">단순 홍보</option></select></div>
             <div class="ff"><label>상태</label><select id="pqStatus" class="fsel"><option value="all">전체</option><option>진행중</option><option>예약</option><option>종료</option></select></div>
             <div class="ff"><label>노출 여부</label><select id="pqShow" class="fsel"><option value="all">전체</option><option>노출</option><option>비노출</option></select></div>
             <div class="ff"><label>종료일</label><div class="frange"><input id="pqEndFrom" class="dt" type="date"><span>~</span><input id="pqEndTo" class="dt" type="date"></div></div>
@@ -807,7 +836,7 @@
             <span style="margin-left:auto" class="mini">홈 화면 하단 &lsquo;매장 프로모션&rsquo; 영역에 노출됩니다</span>
           </div>
           <table>
-            <thead><tr><th>카드</th><th>프로모션명</th><th>매장</th><th>혜택</th><th>기간</th><th>연결 동작</th><th>조회수</th><th>상태</th><th style="text-align:center">노출</th><th style="text-align:center">순서</th><th></th></tr></thead>
+            <thead><tr><th>카드</th><th>프로모션명</th><th>매장</th><th>유형</th><th>연결 설정</th><th>기간</th><th>조회수</th><th>상태</th><th style="text-align:center">노출</th><th></th></tr></thead>
             <tbody id="promoRows"></tbody>
           </table>
           <div class="pg-foot" id="pgPromos"></div>
@@ -1458,32 +1487,29 @@
     <div class="modal-head"><div><h3 id="evmTitle">이벤트 등록</h3><p>이벤트 정보를 입력합니다.</p></div><button type="button" class="btn" id="evF_mnDownload" style="margin-left:auto;padding:7px 12px;font-size:12px;display:none">⤓ 응모자 데이터 내려받기</button><button class="modal-x" onclick="closeEvent()">✕</button></div>
     <div class="modal-body">
       <!-- 1. 이벤트 유형 (최상단) -->
-      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 1</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트 유형 선택</span></div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 1</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트 유형 선택 및 유형별 세부 정보</span></div>
       <div><label class="mlabel">이벤트 유형</label>
         <div class="seg" id="evF_typeSeg" style="display:inline-flex"><button type="button" data-ty="선착순형">선착순형</button><button type="button" class="on" data-ty="랜덤 추첨형">랜덤 추첨형</button><button type="button" data-ty="수동 선정">수동 선정</button></div>
         <input type="hidden" id="evF_type" value="랜덤 추첨형">
         <p class="mini" id="evF_typeHint" style="color:var(--ink3);margin-top:6px"></p>
       </div>
 
-      <!-- 1-B. 이벤트 유형별 세부 정보 (보상 제외 · STEP1 선택에 따라 표시) -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 2</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트 유형별 세부 정보</span></div>
-      <p class="mini" style="color:var(--ink3);margin:4px 0 0">STEP 1에서 고른 이벤트 유형에 맞는 항목만 아래 표시됩니다 (보상 설정은 STEP 7에서 따로 진행)</p>
-
-      <div id="evType_raffle_info" class="evtype" style="margin-top:12px">
+      <!-- 1-B. 이벤트 유형별 세부 정보 (보상 제외 · 유형 선택에 따라 표시) -->
+      <div id="evType_raffle_info" class="evtype" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
         <label class="mini" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="evF_openNoti"> 이벤트 오픈 알림 자동 발송</label>
         <div style="margin-top:12px;max-width:240px"><label class="mlabel">당첨 인원</label><input id="evF_winners" class="finput" type="number" min="1" placeholder="명"></div>
-        <p class="mini" style="color:var(--ink3);margin-top:6px">당첨자 발표일은 STEP 3, 보상 지급일은 STEP 7에서 입력합니다.</p>
+        <p class="mini" style="color:var(--ink3);margin-top:6px">당첨자 발표일은 STEP 2, 보상 지급일은 STEP 6에서 입력합니다.</p>
 
       </div>
 
-      <div id="evType_fcfs_info" class="evtype" style="margin-top:12px;display:none">
+      <div id="evType_fcfs_info" class="evtype" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);display:none">
         <label class="mini" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="evF_fOpenNoti"> 이벤트 오픈 알림 자동 발송</label>
         <div style="margin-top:12px;max-width:240px"><label class="mlabel">선착 한도</label><input id="evF_limit" class="finput" type="number" min="1" placeholder="명"></div>
-        <p class="mini" style="color:var(--ink3);margin-top:6px">보상 지급일은 STEP 7 보상 설정에서 입력합니다. (선착순형은 당첨자 발표 절차가 없습니다)</p>
+        <p class="mini" style="color:var(--ink3);margin-top:6px">보상 지급일은 STEP 6 보상 설정에서 입력합니다. (선착순형은 당첨자 발표 절차가 없습니다)</p>
       </div>
 
       <!-- 2. 이벤트명 · 일정 · 매장 (공통) -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 3</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트명 · 일정 · 매장 입력</span></div>
+      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 2</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트명 · 일정 · 매장 입력</span></div>
       <div style="margin-top:12px"><label class="mlabel">이벤트명 (필수)</label><input id="evF_name" class="finput" placeholder="예: 여름맞이 응모 이벤트"></div>
       <!-- 2-A. 이벤트 시작/종료 일시 (공통 · 이벤트 유형과 무관하게 하나만 존재) -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
@@ -1499,36 +1525,100 @@
         <p class="mini" style="color:var(--ink3);margin-top:6px">특정 입점 매장과 연계된 이벤트라면 매장을 선택하세요. (파트너 연계 미션)</p>
       </div>
       <!-- 3. 이벤트 본문 (공통 · 에디터 / 이미지) -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 4</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트 본문 입력</span></div>
-      <div style="margin-top:12px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><label class="mlabel" style="margin:0">이벤트 본문</label>
-          <div class="seg" id="evF_bodySeg" style="display:inline-flex;margin-left:auto"><button type="button" class="on" data-bm="editor">에디터로 입력</button><button type="button" data-bm="image">이미지로 등록</button></div>
+      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 3</span><span style="font-size:15px;font-weight:800;color:var(--ink)">이벤트 본문 입력</span></div>
+      <!-- 3-A. 이벤트 대표 이미지 (이벤트 썸네일) -->
+      <div style="margin-top:14px">
+        <label class="mlabel">이벤트 대표 이미지 <span style="color:var(--red)">*</span> <span class="mini" style="font-weight:400;color:var(--ink3)">· 이벤트 썸네일로 사용됩니다</span></label>
+        <div id="evThumbGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px">
+          <div>
+            <div class="imgslot-h"><span class="no">1</span>상세 페이지 상단 대표 이미지</div>
+            <div class="imgslot-sz">권장 사이즈 1080 × 720px · 필수</div>
+            <div class="imgslot" data-slot="main"><span class="plus">+</span></div>
+          </div>
+          <div>
+            <div class="imgslot-h"><span class="no">2</span>캘린더 이미지</div>
+            <div class="imgslot-sz">권장 사이즈 320 × 320px · 필수</div>
+            <div class="imgslot" data-slot="cal"><span class="plus">+</span></div>
+          </div>
+          <div>
+            <div class="imgslot-h"><span class="no">3</span>공유 이미지</div>
+            <div class="imgslot-sz">권장 사이즈 1200 × 630px · 선택</div>
+            <div class="imgslot" data-slot="share"><span class="plus">+</span></div>
+          </div>
         </div>
-        <div id="evF_bodyEditor"><textarea id="evF_bodyText" class="finput" rows="5" style="resize:vertical" placeholder="이벤트 본문 내용을 입력하세요"></textarea></div>
-        <div id="evF_bodyImage" style="display:none">
-          <input type="file" id="evF_bodyImgInput" accept="image/*" style="display:none">
-          <button type="button" class="btn" id="evF_bodyImgBtn" style="padding:8px 14px">🖼 이미지 선택</button>
-          <div id="evF_bodyImgPreview" style="margin-top:10px"></div>
+        <input type="file" id="evThumbFile" accept="image/*" style="display:none">
+      </div>
+
+      <!-- 3-B. 이벤트 본문 (에디터) -->
+      <div style="margin-top:20px">
+        <label class="mlabel">이벤트 본문 <span style="color:var(--red)">*</span></label>
+        <div class="rte"><div class="rte-bar"><button type="button" data-cmd="bold" title="굵게"><b>B</b></button><button type="button" data-cmd="italic" title="기울임"><i>I</i></button><button type="button" data-cmd="underline" title="밑줄"><u>U</u></button><button type="button" data-cmd="strikeThrough" title="취소선"><s>S</s></button><span class="sep"></span><button type="button" data-cmd="insertUnorderedList" title="글머리 기호">≔</button><button type="button" data-cmd="insertOrderedList" title="번호 매기기">≡</button><span class="sep"></span><button type="button" data-cmd="justifyLeft" title="왼쪽 정렬">⇤</button><button type="button" data-cmd="justifyCenter" title="가운데 정렬">≣</button><span class="sep"></span><button type="button" data-cmd="createLink" title="링크">🔗</button><button type="button" data-cmd="insertHorizontalRule" title="구분선">―</button><button type="button" data-cmd="removeFormat" title="서식 지우기">✕</button></div>
+          <div class="rte-area" id="evF_bodyRte" contenteditable="true" data-ph="이벤트 본문 내용을 입력하세요"></div>
+        </div>
+        <input type="hidden" id="evF_bodyText">
+      </div>
+
+      <!-- 3-C. FAQ (항목 추가형) -->
+      <div style="margin-top:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <label class="mlabel" style="margin:0">FAQ <span class="mini" style="font-weight:400;color:var(--ink3)">· 최대 10개</span></label>
+          <button type="button" class="btn" id="evF_faqAdd" style="padding:6px 14px;font-size:12.5px;border-radius:99px">항목 추가</button>
+        </div>
+        <div id="evF_faqList"></div>
+      </div>
+
+      <!-- 3-D. 공지사항 및 유의사항 (에디터) -->
+      <div style="margin-top:20px">
+        <label class="mlabel">공지사항 및 유의사항</label>
+        <div class="rte"><div class="rte-bar"><button type="button" data-cmd="bold" title="굵게"><b>B</b></button><button type="button" data-cmd="italic" title="기울임"><i>I</i></button><button type="button" data-cmd="underline" title="밑줄"><u>U</u></button><button type="button" data-cmd="strikeThrough" title="취소선"><s>S</s></button><span class="sep"></span><button type="button" data-cmd="insertUnorderedList" title="글머리 기호">≔</button><button type="button" data-cmd="insertOrderedList" title="번호 매기기">≡</button><span class="sep"></span><button type="button" data-cmd="justifyLeft" title="왼쪽 정렬">⇤</button><button type="button" data-cmd="justifyCenter" title="가운데 정렬">≣</button><span class="sep"></span><button type="button" data-cmd="createLink" title="링크">🔗</button><button type="button" data-cmd="insertHorizontalRule" title="구분선">―</button><button type="button" data-cmd="removeFormat" title="서식 지우기">✕</button></div>
+          <div class="rte-area" id="evF_noticeRte" contenteditable="true" data-ph="참여 전 꼭 알아야 할 공지사항과 유의사항을 입력하세요"></div>
+        </div>
+        <input type="hidden" id="evF_noticeText">
+      </div>
+      <!-- STEP 4. 미션 유형 (3종 고정 · 이벤트당 1개 필수) -->
+      <div id="evF_missionBox" style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink)">
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 4</span><span style="font-size:15px;font-weight:800;color:var(--ink)">미션 유형 선택 및 세부 항목 입력</span></div>
+        <p class="mini" style="color:var(--ink3);margin:-4px 0 10px">각 이벤트는 미션을 통해 당첨자 선정이 진행되며, <b>이벤트당 1개의 미션 세팅이 필수</b>입니다.</p>
+        <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start">
+          <div>
+            <label class="mlabel">미션 유형 <span style="color:var(--red)">*</span> <span class="mini" style="font-weight:400;color:var(--ink3)">· 참여자가 수행할 행동</span></label>
+            <div class="seg" id="evF_missionTypeSeg" style="display:inline-flex"><button type="button" class="on" data-mt="photo">사진/이미지 업로드 미션</button><button type="button" data-mt="apply">단순 응모</button><button type="button" data-mt="text">글등록 미션</button></div>
+            <input type="hidden" id="evF_missionType" value="photo">
+          </div>
+          <div id="evF_msPhotoCountWrap" style="width:230px">
+            <label class="mlabel">최대 업로드 장수 <span class="mini" style="font-weight:400;color:var(--ink3)">· 최대 5장</span></label>
+            <div class="frange"><input id="evF_msPhotoMaxCount" class="finput" type="number" min="1" max="5" placeholder="예: 3"><span class="mini">장</span></div>
+          </div>
+        </div>
+        <p class="mini" id="evF_missionTypeHint" style="color:var(--ink3);margin-top:8px"></p>
+
+        <!-- 미션 1. 사진/이미지 업로드 -->
+        <div id="evF_ms_photo" class="evms" style="margin-top:14px">
+          <label class="mlabel">업로드 안내 문구 <span style="color:var(--red)">*</span></label>
+          <input id="evF_msPhotoGuide" class="finput" placeholder="예) 63층 사진을 올려주세요">
+          <p class="mini" style="color:var(--ink3);margin-top:8px">업로드 가능 형식은 <b>JPG · PNG · GIF · WEBP</b>, 1장당 최대 용량은 <b>10MB</b>로 고정되어 있습니다.</p>
+        </div>
+
+        <!-- 미션 2. 단순 응모 -->
+        <div id="evF_ms_apply" class="evms" style="margin-top:12px;display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><label class="mlabel">응모 버튼 문구</label><input id="evF_msApplyText" class="finput" placeholder="예: 응모하기"></div>
+            <div><label class="mlabel">응모 완료 후 문구</label><input id="evF_msApplyDone" class="finput" placeholder="예: 응모 완료"></div>
+          </div>
+          <div style="margin-top:12px"><label class="mlabel">응모 완료 안내 문구 (선택)</label><input id="evF_msApplyNotice" class="finput" placeholder="예: 응모가 완료되었습니다. 당첨자는 발표일에 앱푸시로 안내됩니다."></div>
+          <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:12px"><input type="checkbox" id="evF_msApplyMultiOn"> 1인 다회 응모 허용</label>
+          <div id="evF_msApplyMultiBox" style="display:none;margin-top:8px;max-width:220px"><label class="mlabel">1인 최대 응모 횟수</label><input id="evF_msApplyMax" class="finput" type="number" min="2" placeholder="예: 3"></div>
+          <p class="mini" style="color:var(--ink3);margin-top:8px">체크하지 않으면 <b>1인 1회</b>만 응모할 수 있습니다.</p>
+        </div>
+
+        <!-- 미션 3. 글등록 미션 -->
+        <div id="evF_ms_text" class="evms" style="margin-top:14px;display:none">
+          <label class="mlabel">입력창 안내 문구 <span style="color:var(--red)">*</span></label>
+          <input id="evF_msTextPlaceholder" class="finput" placeholder="예) 63빌딩에서 가장 기억에 남는 순간을 적어주세요">
+          <p class="mini" style="color:var(--ink3);margin-top:8px">작성 가능 글자수는 <b>최소 20자 · 최대 500자</b>로 고정되어 있습니다. 작성된 글은 <b>앱 내에 노출되지 않으며</b>, 담당자가 어드민에서만 확인할 수 있습니다.</p>
         </div>
       </div>
-      <input type="hidden" id="evF_bodyMode" value="editor">
-      <!-- FAQ : 항목별 입력 -->
-      <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line)">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <label class="mlabel" style="margin:0">FAQ (선택) <span class="mini" style="font-weight:400;color:var(--ink3)">· 항목별로 추가 · 최대 10개</span></label>
-          <button type="button" class="btn" id="evF_faqAdd" style="padding:5px 10px;font-size:12px">+ FAQ 추가</button>
-        </div>
-        <div id="evF_faqList" style="margin-top:8px"></div>
-      </div>
-      <!-- 안내사항 / 공지사항 : 항목별 입력 -->
-      <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line)">
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <label class="mlabel" style="margin:0">안내사항 / 공지사항 (선택) <span class="mini" style="font-weight:400;color:var(--ink3)">· 항목별로 추가 · 최대 10개</span></label>
-          <button type="button" class="btn" id="evF_noticeAdd" style="padding:5px 10px;font-size:12px">+ 안내사항 추가</button>
-        </div>
-        <div id="evF_noticeList" style="margin-top:8px"></div>
-      </div>
-      <!-- 2-C. 응모 자격 조건 (공통 · 층 기반) -->
+      <!-- STEP 5. 응모 자격 조건 (공통 · 층 기반) -->
       <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink)">
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 5</span><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">· 선택 사항</span></div>
         <label style="font-size:16px;font-weight:700;color:var(--ink);display:block">층별 응모자격조건/당첨확률 설정 <span class="mini" style="font-weight:400;color:var(--ink3)">· 층(등급) 기반, 선택</span></label>
@@ -1569,61 +1659,8 @@
         </div>
       </div>
 
-      <!-- 3-B. 미션 유형 (3종 고정 · 이벤트당 1개 필수) -->
-      <div id="evF_missionBox" style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink)">
-        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:10px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 6</span><span style="font-size:15px;font-weight:800;color:var(--ink)">미션 유형 선택 및 세부 항목 입력</span></div>
-        <p class="mini" style="color:var(--ink3);margin:-4px 0 10px">각 이벤트는 미션을 통해 당첨자 선정이 진행되며, <b>이벤트당 1개의 미션 세팅이 필수</b>입니다.</p>
-        <label class="mlabel">미션 유형 (필수) <span class="mini" style="font-weight:400;color:var(--ink3)">· 참여자가 수행할 행동</span></label>
-        <select id="evF_missionType" class="fsel" style="max-width:260px">
-          <option value="photo">사진/이미지 업로드</option>
-          <option value="apply">단순 응모</option>
-          <option value="text">글등록 미션</option>
-        </select>
-        <p class="mini" id="evF_missionTypeHint" style="color:var(--ink3);margin-top:6px"></p>
 
-        <!-- 미션 1. 사진/이미지 업로드 -->
-        <div id="evF_ms_photo" class="evms" style="margin-top:12px">
-          <label class="mlabel">사진 업로드 안내 문구 (필수)</label><input id="evF_msPhotoGuide" class="finput" placeholder="예: 63층 인증샷을 올려주세요">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
-            <div><label class="mlabel">최대 용량 (MB)</label><input id="evF_msPhotoMaxMb" class="finput" type="number" min="1" placeholder="예: 10"></div>
-            <div><label class="mlabel">최대 업로드 장수 <span class="mini" style="font-weight:400;color:var(--ink3)">· 최대 5장</span></label><input id="evF_msPhotoMaxCount" class="finput" type="number" min="1" max="5" placeholder="예: 3"></div>
-          </div>
-          <div style="margin-top:10px"><label class="mlabel">허용 확장자</label>
-            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px">
-              <label class="mini" style="display:flex;gap:6px;align-items:center"><input type="checkbox" class="evms-photoext" value="jpg" checked> JPG</label>
-              <label class="mini" style="display:flex;gap:6px;align-items:center"><input type="checkbox" class="evms-photoext" value="png" checked> PNG</label>
-              <label class="mini" style="display:flex;gap:6px;align-items:center"><input type="checkbox" class="evms-photoext" value="gif" checked> GIF</label>
-              <label class="mini" style="display:flex;gap:6px;align-items:center"><input type="checkbox" class="evms-photoext" value="webp" checked> WEBP</label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 미션 2. 단순 응모 -->
-        <div id="evF_ms_apply" class="evms" style="margin-top:12px;display:none">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div><label class="mlabel">응모 버튼 문구</label><input id="evF_msApplyText" class="finput" placeholder="예: 응모하기"></div>
-            <div><label class="mlabel">응모 완료 후 문구</label><input id="evF_msApplyDone" class="finput" placeholder="예: 응모 완료"></div>
-          </div>
-          <div style="margin-top:12px"><label class="mlabel">응모 완료 안내 문구 (선택)</label><input id="evF_msApplyNotice" class="finput" placeholder="예: 응모가 완료되었습니다. 당첨자는 발표일에 앱푸시로 안내됩니다."></div>
-          <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:12px"><input type="checkbox" id="evF_msApplyMultiOn"> 1인 다회 응모 허용</label>
-          <div id="evF_msApplyMultiBox" style="display:none;margin-top:8px;max-width:220px"><label class="mlabel">1인 최대 응모 횟수</label><input id="evF_msApplyMax" class="finput" type="number" min="2" placeholder="예: 3"></div>
-          <p class="mini" style="color:var(--ink3);margin-top:8px">체크하지 않으면 <b>1인 1회</b>만 응모할 수 있습니다.</p>
-        </div>
-
-        <!-- 미션 3. 글등록 미션 -->
-        <div id="evF_ms_text" class="evms" style="margin-top:12px;display:none">
-          <label class="mlabel">질문 (필수) <span class="mini" style="font-weight:400;color:var(--ink3)">· 유저가 이 질문에 답하는 글을 작성합니다</span></label>
-          <input id="evF_msTextQuestion" class="finput" placeholder="예: 63빌딩에서 가장 기억에 남는 순간은 무엇인가요?">
-          <div style="margin-top:12px"><label class="mlabel">입력창 안내 문구 (선택)</label><input id="evF_msTextPlaceholder" class="finput" placeholder="예: 자유롭게 작성해 주세요 (최소 20자)"></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-            <div><label class="mlabel">최소 글자수</label><input id="evF_msTextMin" class="finput" type="number" min="1" placeholder="예: 20"></div>
-            <div><label class="mlabel">최대 글자수</label><input id="evF_msTextMax" class="finput" type="number" min="1" placeholder="예: 500"></div>
-          </div>
-          <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:12px"><input type="checkbox" id="evF_msTextPublic"> 작성한 글을 앱 내에 공개 (다른 유저가 열람 가능)</label>
-        </div>
-      </div>
-
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 7</span><span style="font-size:15px;font-weight:800;color:var(--ink)">보상 설정</span></div>
+      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 6</span><span style="font-size:15px;font-weight:800;color:var(--ink)">보상 설정</span></div>
       <p class="mini" style="color:var(--ink3);margin:4px 0 0">STEP 1에서 고른 이벤트 유형에 맞는 보상 UI만 아래 표시됩니다</p>
 
       <!-- 보상 유형 · 보상 지급일 (한 행) -->
@@ -1641,14 +1678,14 @@
       <div id="evType_raffle" class="evtype" style="margin-top:14px">
         <div id="evF_RewardCoupon"><label class="mlabel">지급할 쿠폰 (기존 발급 쿠폰) <span class="mini" style="font-weight:400;color:var(--ink3)">· 63빌딩 입주사 쿠폰 발행</span></label><select id="evF_couponSel" class="fsel"></select><p class="mini" style="color:var(--ink3);margin-top:6px"><b>배포 프로세스</b> · 위에서 세팅한 <b>보상 지급일</b>에 PAYCO API로 송출되어 고객 월렛으로 자동 지급됩니다.</p></div>
         <div id="evF_RewardGold" style="margin-top:8px;display:none"><label class="mlabel">지급 골드 수량 <span class="mini" style="font-weight:400;color:var(--ink3)">· 당첨자 대상 담당자가 지정한 골드 지급</span></label><div class="frange"><input id="evF_goldAmt" class="finput" type="number" min="1" placeholder="예: 1000"><span class="mini">G</span></div><p class="mini" style="color:var(--ink3);margin-top:6px"><b>배포 프로세스</b> · 위에서 세팅한 <b>보상 지급일</b>에 PAYCO API로 송출되어 고객 월렛으로 자동 지급됩니다.</p></div>
-        <div id="evF_RewardPrize" style="margin-top:8px;display:none"><label class="mlabel">실물 경품 내용</label><div style="display:grid;grid-template-columns:1fr 120px;gap:10px"><input id="evF_prizeText" class="finput" placeholder="예: 스타벅스 기프트카드"><input id="evF_prizeQty" class="finput" type="number" min="1" placeholder="수량"></div><p class="mini" style="color:var(--ink3);margin-top:6px">당첨자 대상 담당자가 지정한 실물 경품을 지급합니다. <b>배포 방식은 별도 협의 필요</b> (대행사 RSVP · 현장 수령 등)</p></div>
+        <div id="evF_RewardPrize" style="margin-top:8px;display:none"><label class="mlabel">경품 지급 안내 문구 <span style="color:var(--red)">*</span> <span class="mini" style="font-weight:400;color:var(--ink3)">· 당첨자에게 노출되는 문구입니다 (Wallet_혜택_당첨된 혜택)</span></label><textarea id="evF_prizeText" class="finput" rows="3" style="resize:vertical" placeholder="예) 당첨을 축하드립니다. 당첨자 분들에겐 개별 유선안내가 나갈 예정입니다."></textarea><p class="mini" style="color:var(--ink3);margin-top:8px">실물 경품은 앱에서 자동 지급되지 않습니다. 위 문구가 당첨자 Wallet에 노출되며, <b>실제 배포 방식은 별도 협의 필요</b> (대행사 RSVP · 현장 수령 등)</p></div>
       </div>
 
       <!-- 4-B. 선착순형 -->
       <div id="evType_fcfs" class="evtype" style="margin-top:14px;display:none">
         <div id="evF_fRewardCoupon"><label class="mlabel">지급할 쿠폰 (기존 발급 쿠폰) <span class="mini" style="font-weight:400;color:var(--ink3)">· 63빌딩 입주사 쿠폰 발행</span></label><select id="evF_fCouponSel" class="fsel"></select><p class="mini" style="color:var(--ink3);margin-top:6px"><b>배포 프로세스</b> · 위에서 세팅한 <b>보상 지급일</b>에 PAYCO API로 송출되어 고객 월렛으로 자동 지급됩니다.</p></div>
         <div id="evF_fRewardGold" style="margin-top:8px;display:none"><label class="mlabel">지급 골드 수량 <span class="mini" style="font-weight:400;color:var(--ink3)">· 당첨자 대상 담당자가 지정한 골드 지급</span></label><div class="frange"><input id="evF_fGoldAmt" class="finput" type="number" min="1" placeholder="예: 1000"><span class="mini">G</span></div><p class="mini" style="color:var(--ink3);margin-top:6px"><b>배포 프로세스</b> · 위에서 세팅한 <b>보상 지급일</b>에 PAYCO API로 송출되어 고객 월렛으로 자동 지급됩니다.</p></div>
-        <div id="evF_fRewardPrize" style="margin-top:8px;display:none"><label class="mlabel">실물 경품 내용</label><div style="display:grid;grid-template-columns:1fr 120px;gap:10px"><input id="evF_fPrizeText" class="finput" placeholder="예: 스타벅스 기프트카드"><input id="evF_fPrizeQty" class="finput" type="number" min="1" placeholder="수량"></div><p class="mini" style="color:var(--ink3);margin-top:6px">당첨자 대상 담당자가 지정한 실물 경품을 지급합니다. <b>배포 방식은 별도 협의 필요</b> (대행사 RSVP · 현장 수령 등)</p></div>
+        <div id="evF_fRewardPrize" style="margin-top:8px;display:none"><label class="mlabel">경품 지급 안내 문구 <span style="color:var(--red)">*</span> <span class="mini" style="font-weight:400;color:var(--ink3)">· 당첨자에게 노출되는 문구입니다 (Wallet_혜택_당첨된 혜택)</span></label><textarea id="evF_fPrizeText" class="finput" rows="3" style="resize:vertical" placeholder="예) 당첨을 축하드립니다. 당첨자 분들에겐 개별 유선안내가 나갈 예정입니다."></textarea><p class="mini" style="color:var(--ink3);margin-top:8px">실물 경품은 앱에서 자동 지급되지 않습니다. 위 문구가 당첨자 Wallet에 노출되며, <b>실제 배포 방식은 별도 협의 필요</b> (대행사 RSVP · 현장 수령 등)</p></div>
       </div>
 
       <div class="err" id="evF_err"></div>
@@ -1857,133 +1894,111 @@
 
       <div class="warn" style="background:var(--surface2);border-color:var(--line)"><span>ℹ</span><span>매장 프로모션은 <b>매장이 요청한 혜택을 홍보</b>하는 용도입니다. 응모·미션·당첨자 선정·보상 지급 기능은 포함되지 않습니다.</span></div>
 
-      <!-- STEP 1 -->
-      <div style="margin-top:18px;display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 1</span><span style="font-size:15px;font-weight:800;color:var(--ink)">매장 선택</span></div>
-      <div style="margin-top:12px"><label class="mlabel">프로모션 진행 매장 (필수)</label><select id="pmF_store" class="fsel"></select>
-        <p class="mini" style="color:var(--ink3);margin-top:6px">선택한 매장명이 앱 카드 하단에 표시되며, 매장 상세 페이지와 연결됩니다.</p>
-      </div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div><label class="mlabel">카드 배지 라벨 (선택)</label><input id="pmF_badge" class="finput" placeholder="예: 전망대 / 다이닝 / 카페"><p class="mini" style="color:var(--ink3);margin-top:6px">카드 이미지 좌측 상단에 표시되는 작은 라벨</p></div>
-        <div><label class="mlabel">매장 담당자 · 요청 메모 (내부용)</label><input id="pmF_memo" class="finput" placeholder="예: 김OO 점장 / 9월 광고 요청"><p class="mini" style="color:var(--ink3);margin-top:6px">앱에는 노출되지 않는 운영 메모</p></div>
-      </div>
-
-      <!-- STEP 2 -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 2</span><span style="font-size:15px;font-weight:800;color:var(--ink)">프로모션 기본 정보</span></div>
-      <div style="margin-top:12px"><label class="mlabel">프로모션명 (필수)</label><input id="pmF_name" class="finput" placeholder="예: 가을밤 야간권 얼리버드 30%"></div>
-      <div style="margin-top:12px"><label class="mlabel">한 줄 설명 (선택)</label><input id="pmF_sub" class="finput" placeholder="예: 평일 야간 입장권을 미리 예매하면 30% 할인"></div>
-      <div style="margin-top:14px"><label class="mlabel">혜택 유형 (필수)</label>
-        <div class="seg" id="pmF_typeSeg" style="display:inline-flex;flex-wrap:wrap"><button type="button" class="on" data-pt="할인">할인</button><button type="button" data-pt="증정/사은품">증정/사은품</button><button type="button" data-pt="1+1">1+1</button><button type="button" data-pt="세트/패키지">세트/패키지</button><button type="button" data-pt="체험/무료">체험/무료</button><button type="button" data-pt="기타">기타</button></div>
-        <input type="hidden" id="pmF_type" value="할인">
-        <p class="mini" id="pmF_typeHint" style="color:var(--ink3);margin-top:6px"></p>
-      </div>
-
-      <!-- STEP 3 -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 3</span><span style="font-size:15px;font-weight:800;color:var(--ink)">혜택 상세 입력</span></div>
-      <p class="mini" style="color:var(--ink3);margin:4px 0 0">STEP 2에서 고른 혜택 유형에 맞는 항목만 아래 표시됩니다</p>
-
-      <div class="pmtype" id="pmT_할인" style="margin-top:12px">
-        <label class="mlabel">할인 방식</label>
-        <div class="seg" id="pmF_discSeg" style="display:inline-flex"><button type="button" class="on" data-dm="rate">정률 (%)</button><button type="button" data-dm="amount">정액 (원)</button></div>
-        <input type="hidden" id="pmF_discMode" value="rate">
-        <div style="margin-top:10px;display:grid;grid-template-columns:200px 1fr;gap:12px;align-items:end">
-          <div><label class="mlabel">할인 값</label><div class="frange"><input id="pmF_discVal" class="finput" type="number" min="1" placeholder="예: 30"><span class="mini" id="pmF_discUnit">%</span></div></div>
-          <div><label class="mlabel">할인 대상 품목 (선택)</label><input id="pmF_discTarget" class="finput" placeholder="예: 야간 전망대 입장권"></div>
-        </div>
-      </div>
-      <div class="pmtype" id="pmT_증정/사은품" style="margin-top:12px;display:none">
-        <div style="display:grid;grid-template-columns:1fr 160px;gap:12px">
-          <div><label class="mlabel">증정품 내용</label><input id="pmF_giftText" class="finput" placeholder="예: 음료 1잔 무료 제공"></div>
-          <div><label class="mlabel">일 제공 수량 (선택)</label><input id="pmF_giftQty" class="finput" type="number" min="1" placeholder="예: 50"></div>
-        </div>
-      </div>
-      <div class="pmtype" id="pmT_1+1" style="margin-top:12px;display:none">
-        <label class="mlabel">1+1 대상 품목</label><input id="pmF_bogoText" class="finput" placeholder="예: 시그니처 케이크 전 품목">
-      </div>
-      <div class="pmtype" id="pmT_세트/패키지" style="margin-top:12px;display:none">
-        <div style="display:grid;grid-template-columns:1fr 160px;gap:12px">
-          <div><label class="mlabel">세트 구성</label><input id="pmF_setText" class="finput" placeholder="예: 전망대 입장권 + 아메리카노 2잔"></div>
-          <div><label class="mlabel">세트 판매가 (선택)</label><input id="pmF_setPrice" class="finput" type="number" min="0" placeholder="예: 29000"></div>
-        </div>
-      </div>
-      <div class="pmtype" id="pmT_체험/무료" style="margin-top:12px;display:none">
-        <div style="display:grid;grid-template-columns:1fr 160px;gap:12px">
-          <div><label class="mlabel">체험 내용</label><input id="pmF_expText" class="finput" placeholder="예: 아트 전시 도슨트 무료 참여"></div>
-          <div><label class="mlabel">회차당 인원 (선택)</label><input id="pmF_expCap" class="finput" type="number" min="1" placeholder="예: 20"></div>
-        </div>
-      </div>
-      <div class="pmtype" id="pmT_기타" style="margin-top:12px;display:none">
-        <label class="mlabel">혜택 내용 (자유 입력)</label><input id="pmF_etcText" class="finput" placeholder="혜택 내용을 입력하세요">
-      </div>
-
-      <div style="margin-top:14px"><label class="mlabel">이용 조건 (선택)</label><textarea id="pmF_cond" class="finput" rows="2" style="resize:vertical" placeholder="예: 앱 화면 제시 시 적용 / 평일 18시 이후 방문 고객 한정"></textarea></div>
-      <div style="margin-top:12px"><label class="mlabel">유의사항 (선택)</label><textarea id="pmF_caution" class="finput" rows="2" style="resize:vertical" placeholder="예: 타 할인과 중복 적용 불가 / 공휴일 제외"></textarea></div>
-
-      <!-- STEP 4 -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 4</span><span style="font-size:15px;font-weight:800;color:var(--ink)">카드 이미지 · 상세 본문</span></div>
-      <div style="margin-top:12px"><label class="mlabel">카드 이미지 (필수) <span class="mini" style="font-weight:400;color:var(--ink3)">· 세로형 카드 권장 (3:4)</span></label>
-        <div id="pmImgPreview" style="margin-top:6px"></div>
-        <div style="display:flex;gap:8px;margin-top:8px"><button type="button" class="btn" id="pmImgBtn">🖼 이미지 선택</button></div>
-        <input type="file" id="pmImgFile" accept="image/*" style="display:none">
-      </div>
-      <div style="margin-top:16px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><label class="mlabel" style="margin:0">상세 본문</label>
-          <div class="seg" id="pmF_bodySeg" style="display:inline-flex"><button type="button" class="on" data-bm="editor">텍스트 입력</button><button type="button" data-bm="image">이미지로 대체</button></div>
-          <input type="hidden" id="pmF_bodyMode" value="editor">
-        </div>
-        <div id="pmF_bodyEditor"><textarea id="pmF_bodyText" class="finput" rows="5" style="resize:vertical" placeholder="프로모션 상세 내용을 입력하세요"></textarea></div>
-        <div id="pmF_bodyImageBox" style="display:none">
-          <div id="pmBodyImgPreview"></div>
-          <button type="button" class="btn" id="pmBodyImgBtn" style="margin-top:8px">🖼 상세 이미지 선택</button>
-          <input type="file" id="pmBodyImgFile" accept="image/*" style="display:none">
-        </div>
-      </div>
-
-      <!-- STEP 5 -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 5</span><span style="font-size:15px;font-weight:800;color:var(--ink)">진행 기간 설정</span></div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div><label class="mlabel">시작 (일시)</label><input id="pmF_start" class="dt" type="datetime-local"></div>
-        <div><label class="mlabel">종료 (일시)</label><input id="pmF_end" class="dt" type="datetime-local"></div>
-      </div>
-      <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:10px"><input type="checkbox" id="pmF_always"> 상시 진행 (종료일 없음)</label>
-      <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:10px"><input type="checkbox" id="pmF_limitOn"> 특정 요일·시간에만 적용</label>
-      <div id="pmF_limitBox" style="display:none;margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface2)">
-        <label class="mlabel">적용 요일</label>
-        <div id="pmF_dayChips" style="display:flex;gap:6px;flex-wrap:wrap">
-          <button type="button" class="chip" data-day="월">월</button><button type="button" class="chip" data-day="화">화</button><button type="button" class="chip" data-day="수">수</button><button type="button" class="chip" data-day="목">목</button><button type="button" class="chip" data-day="금">금</button><button type="button" class="chip" data-day="토">토</button><button type="button" class="chip" data-day="일">일</button>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div><label class="mlabel">적용 시작 시간</label><input id="pmF_timeFrom" class="dt" type="time"></div>
-          <div><label class="mlabel">적용 종료 시간</label><input id="pmF_timeTo" class="dt" type="time"></div>
-        </div>
-        <p class="mini" style="color:var(--ink3);margin-top:8px">예) 매주 수요일 18:00~21:00 → 앱 카드에 &lsquo;매주 수요일 ~ 9PM&rsquo; 형태로 표시됩니다.</p>
-      </div>
-
-      <!-- STEP 6 -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 6</span><span style="font-size:15px;font-weight:800;color:var(--ink)">앱에서의 연결 동작</span></div>
-      <p class="mini" style="color:var(--ink3);margin:4px 0 0">사용자가 홈에서 프로모션 카드를 눌렀을 때의 동작을 지정합니다</p>
+      <!-- STEP 1. 프로모션 유형 선택 -->
+      <div style="margin-top:18px;display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 1</span><span style="font-size:15px;font-weight:800;color:var(--ink)">프로모션 유형 선택</span></div>
       <div style="margin-top:12px">
-        <div class="seg" id="pmF_actSeg" style="display:inline-flex;flex-wrap:wrap"><button type="button" class="on" data-ac="detail">상세 페이지만 보기</button><button type="button" data-ac="coupon">쿠폰 다운로드</button><button type="button" data-ac="store">매장 상세로 이동</button><button type="button" data-ac="url">외부 링크/딥링크</button></div>
-        <input type="hidden" id="pmF_action" value="detail">
-        <div class="pmact" id="pmA_detail" style="margin-top:10px"><p class="mini" style="color:var(--ink3)">STEP 4에서 입력한 상세 본문 화면으로 이동합니다. 별도 설정이 필요 없습니다.</p></div>
-        <div class="pmact" id="pmA_coupon" style="margin-top:10px;display:none"><label class="mlabel">연결할 쿠폰 (기존 발급 쿠폰)</label><select id="pmF_coupon" class="fsel"></select><p class="mini" style="color:var(--ink3);margin-top:6px">카드 하단에 &lsquo;쿠폰 받기&rsquo; 버튼이 노출되며, 회원당 1회 다운로드됩니다.</p></div>
-        <div class="pmact" id="pmA_store" style="margin-top:10px;display:none"><p class="mini" style="color:var(--ink3)">STEP 1에서 선택한 매장의 상세 페이지로 이동합니다. 별도 설정이 필요 없습니다.</p></div>
-        <div class="pmact" id="pmA_url" style="margin-top:10px;display:none"><label class="mlabel">이동 링크</label><input id="pmF_url" class="finput" placeholder="https:// 또는 딥링크"></div>
+        <label class="mlabel">프로모션 유형 <span style="color:var(--red)">*</span></label>
+        <div class="seg" id="pmF_typeSeg" style="display:inline-flex"><button type="button" class="on" data-pt="coupon">할인 쿠폰</button><button type="button" data-pt="promo">단순 홍보</button></div>
+        <input type="hidden" id="pmF_type" value="coupon">
+        <p class="mini" id="pmF_typeHint" style="color:var(--ink3);margin-top:7px"></p>
       </div>
 
-      <!-- STEP 7 -->
-      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 7</span><span style="font-size:15px;font-weight:800;color:var(--ink)">노출 설정</span></div>
-      <div style="margin-top:12px;display:grid;grid-template-columns:180px 1fr;gap:12px;align-items:end">
-        <div><label class="mlabel">노출 순서</label><input id="pmF_order" class="finput" type="number" min="1" placeholder="예: 1"></div>
-        <p class="mini" style="color:var(--ink3);padding-bottom:9px">숫자가 작을수록 &lsquo;매장 프로모션&rsquo; 영역에서 먼저 노출됩니다</p>
+      <div class="pmtype" id="pmT_coupon" style="margin-top:14px">
+        <label class="mlabel">제공되는 쿠폰을 세팅해주세요 <span style="color:var(--red)">*</span></label>
+        <select id="pmF_coupon" class="fsel"></select>
+        <p class="mini" style="color:var(--ink3);margin-top:7px">카드 하단에 &lsquo;쿠폰 받기&rsquo; 버튼이 노출되며, 회원당 1회 다운로드됩니다.</p>
       </div>
-      <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:12px"><input type="checkbox" id="pmF_show" checked> 앱 홈 &lsquo;매장 프로모션&rsquo; 영역에 노출</label>
-      <label class="mini" style="display:flex;gap:6px;align-items:center;margin-top:10px"><input type="checkbox" id="pmF_push"> 프로모션 시작 시 앱푸시 자동 발송</label>
+      <div class="pmtype" id="pmT_promo" style="margin-top:14px;display:none"></div>
+
+      <!-- STEP 2. 프로모션 개요 -->
+      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 2</span><span style="font-size:15px;font-weight:800;color:var(--ink)">프로모션 개요</span></div>
+      <div style="margin-top:12px"><label class="mlabel">프로모션 명 <span style="color:var(--red)">*</span></label><input id="pmF_name" class="finput" placeholder="예) 벤슨 아이스크림 싱글컵 할인 쿠폰"></div>
+      <div style="margin-top:12px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end">
+        <div style="flex:1;min-width:210px"><label class="mlabel">프로모션 시작 (일시) <span style="color:var(--red)">*</span></label><input id="pmF_start" class="dt" type="datetime-local" style="width:100%"></div>
+        <div style="flex:1;min-width:210px"><label class="mlabel">프로모션 종료 (일시) <span style="color:var(--red)">*</span></label><input id="pmF_end" class="dt" type="datetime-local" style="width:100%"></div>
+        <label class="mini" style="display:flex;gap:7px;align-items:center;padding-bottom:11px;white-space:nowrap"><input type="checkbox" id="pmF_push"> 프로모션 오픈 알림 자동 발송</label>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start">
+        <div style="flex:1;min-width:280px">
+          <label class="mlabel">연계 매장 (선택)</label>
+          <select id="pmF_store" class="fsel"></select>
+          <p class="mini" style="color:var(--ink3);margin-top:6px">특정 입점 매장과 연계된 프로모션이라면 매장을 선택하세요. (파트너 연계)</p>
+        </div>
+        <div style="flex:1;min-width:280px">
+          <label class="mlabel">노출</label>
+          <div style="margin-top:2px"><label class="tgl"><input type="checkbox" id="pmF_show" checked><span class="track"></span><span class="knob"></span></label></div>
+          <p class="mini" style="color:var(--ink3);margin-top:8px">* 프로모션은 노출 여부와 관계없이 프로모션이 종료되면 자동 비노출 처리됩니다.</p>
+        </div>
+      </div>
+
+      <!-- STEP 3. 프로모션 본문 입력 -->
+      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 3</span><span style="font-size:15px;font-weight:800;color:var(--ink)">프로모션 본문 입력</span></div>
+
+      <div style="margin-top:14px">
+        <label class="mlabel">프로모션 대표 이미지 <span style="color:var(--red)">*</span></label>
+        <div id="pmThumbGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px">
+          <div>
+            <div class="imgslot-h"><span class="no">1</span>상세 페이지 상단 대표 이미지</div>
+            <div class="imgslot-sz">권장 사이즈 1080 × 720px · 필수</div>
+            <div class="imgslot" data-slot="main"><span class="plus">+</span></div>
+          </div>
+          <div>
+            <div class="imgslot-h"><span class="no">2</span>매장 프로모션 리스트 이미지</div>
+            <div class="imgslot-sz">권장 사이즈 720 × 960px (3:4) · 필수</div>
+            <div class="imgslot" data-slot="list"><span class="plus">+</span></div>
+          </div>
+          <div>
+            <div class="imgslot-h"><span class="no">3</span>공유 이미지</div>
+            <div class="imgslot-sz">권장 사이즈 1200 × 630px · 선택</div>
+            <div class="imgslot" data-slot="share"><span class="plus">+</span></div>
+          </div>
+        </div>
+        <input type="file" id="pmThumbFile" accept="image/*" style="display:none">
+      </div>
+
+      <div style="margin-top:20px">
+        <label class="mlabel">프로모션 본문 <span style="color:var(--red)">*</span></label>
+        <div class="rte"><div class="rte-bar"><button type="button" data-cmd="bold" title="굵게"><b>B</b></button><button type="button" data-cmd="italic" title="기울임"><i>I</i></button><button type="button" data-cmd="underline" title="밑줄"><u>U</u></button><button type="button" data-cmd="strikeThrough" title="취소선"><s>S</s></button><span class="sep"></span><button type="button" data-cmd="insertUnorderedList" title="글머리 기호">≔</button><button type="button" data-cmd="insertOrderedList" title="번호 매기기">≡</button><span class="sep"></span><button type="button" data-cmd="createLink" title="링크">🔗</button><button type="button" data-cmd="insertHorizontalRule" title="구분선">―</button><button type="button" data-cmd="removeFormat" title="서식 지우기">✕</button></div>
+          <div class="rte-area" id="pmF_bodyRte" contenteditable="true" data-ph="프로모션 본문 내용을 입력하세요"></div>
+        </div>
+        <input type="hidden" id="pmF_bodyText">
+      </div>
+
+      <div style="margin-top:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <label class="mlabel" style="margin:0">FAQ <span class="mini" style="font-weight:400;color:var(--ink3)">· 최대 10개</span></label>
+          <button type="button" class="btn" id="pmF_faqAdd" style="padding:6px 14px;font-size:12.5px;border-radius:99px">항목 추가</button>
+        </div>
+        <div id="pmF_faqList"></div>
+      </div>
+
+      <div style="margin-top:20px">
+        <label class="mlabel">공지사항 및 유의사항</label>
+        <div class="rte"><div class="rte-bar"><button type="button" data-cmd="bold" title="굵게"><b>B</b></button><button type="button" data-cmd="italic" title="기울임"><i>I</i></button><button type="button" data-cmd="underline" title="밑줄"><u>U</u></button><button type="button" data-cmd="strikeThrough" title="취소선"><s>S</s></button><span class="sep"></span><button type="button" data-cmd="insertUnorderedList" title="글머리 기호">≔</button><button type="button" data-cmd="insertOrderedList" title="번호 매기기">≡</button><span class="sep"></span><button type="button" data-cmd="createLink" title="링크">🔗</button><button type="button" data-cmd="insertHorizontalRule" title="구분선">―</button><button type="button" data-cmd="removeFormat" title="서식 지우기">✕</button></div>
+          <div class="rte-area" id="pmF_noticeRte" contenteditable="true" data-ph="본문 내용을 입력하세요"></div>
+        </div>
+        <input type="hidden" id="pmF_noticeText">
+      </div>
+
+      <!-- STEP 4. 프로모션 획득 자격조건 설정 -->
+      <div style="margin-top:24px;padding-top:16px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:8px"><span style="font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.05em">STEP 4</span><span style="font-size:15px;font-weight:800;color:var(--ink)">프로모션 획득 자격조건 설정</span></div>
+      <p class="mini" id="pmF_floorIntro" style="color:var(--ink3);margin:6px 0 0;line-height:1.6">본 설정은 랜덤 추첨시에만 노출됩니다.<br>선택 항목, 응모 가능 층 우대 혜택 적용 복수 선택 가능</p>
+
+      <label style="display:flex;gap:8px;align-items:center;margin-top:18px;font-size:14.5px;font-weight:700;color:var(--ink)"><input type="checkbox" id="pmF_floorOn"> 획득 가능 층 설정</label>
+      <div id="pmF_floorBox" style="margin-top:12px">
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <div style="width:210px"><label class="mlabel">최소 층 (필수)</label><select id="pmF_floorMin" class="fsel"></select></div>
+          <div style="width:210px"><label class="mlabel">최대 층 (선택)</label><select id="pmF_floorMax" class="fsel"></select></div>
+        </div>
+        <p class="mini" style="color:var(--ink3);margin-top:10px">최대 층을 비워두면 &ldquo;최소 층 이상&rdquo; 전원, 지정하면 그 구간(최소~최대) 회원만 응모할 수 있습니다.</p>
+      </div>
 
       <div class="err" id="pmF_err" style="margin-top:14px"></div>
     </div>
     <div class="modal-foot">
       <button class="btn" id="pmDelete" style="margin-right:auto;display:none">삭제</button>
       <button class="btn" onclick="closePromo()">취소</button>
+      <button class="btn" id="pmPreview">미리보기</button>
       <button class="btn primary" id="pmSave">등록</button>
     </div>
   </div>
@@ -2931,7 +2946,10 @@
   // ---- 이벤트 관리 (리스트형 · 상태 3종 · 노출 토글) ----
   var events=[
     {id:'ev_photobooth', name:'63 레트로 포토부스 이벤트', type:'수동 선정',
-      bodyMode:'editor', bodyText:'63빌딩에서의 추억이 담긴 옛날 사진을 인증하고 특별한 이용권을 받아보세요!', bodyImg:null, faq:[{q:'응모는 몇 번까지 가능한가요?',a:'1인 1회만 응모할 수 있습니다.'}], notice:['본인이 직접 촬영한 사진만 인정됩니다.','타인의 사진을 도용할 경우 당첨이 취소될 수 있습니다.'],
+      thumbs:{main:fPlaceholderImg('63 레트로 포토부스','#2C5C8F'),cal:fPlaceholderImg('포토부스','#2C5C8F'),share:null},
+      bodyText:'<div>63빌딩에서의 추억이 담긴 옛날 사진을 인증하고 특별한 이용권을 받아보세요!</div>',
+      faq:[{q:'응모는 몇 번까지 가능한가요?',a:'1인 1회만 응모할 수 있습니다.'}],
+      notice:'<ul><li>본인이 직접 촬영한 사진만 인정됩니다.</li><li>타인의 사진을 도용할 경우 당첨이 취소될 수 있습니다.</li></ul>',
       desc:'63빌딩에서의 추억이 담긴 옛날 사진을 인증하고 특별한 이용권을 받아…',
       openNoti:true, announce:'2026-07-01', payday:'2026-07-05', extra:100,
       rewardType:'coupon', rewardCoupon:'63빌딩 이용권', rewardGold:null, rewardPrize:null, rewardPrizeQty:null, rewardEtc:null,
@@ -2941,7 +2959,8 @@
       msTextQuestion:null, msTextPlaceholder:null, msTextMin:null, msTextMax:null, msTextPublic:false,
       start:'2026-05-15T00:00', end:'2026-06-30T23:59', parti:8420, st:'진행중', show:true},
     {id:'ev_mirror', name:'63 전망대 미러볼 포토존 응모', type:'랜덤 추첨형',
-      bodyMode:'editor', bodyText:'미러볼 포토존에서 인생샷을 남기고 응모하세요.', bodyImg:null, faq:[], notice:[],
+      thumbs:{main:fPlaceholderImg('미러볼 포토존','#3B6FB5'),cal:fPlaceholderImg('미러볼','#3B6FB5'),share:null},
+      bodyText:'<div>미러볼 포토존에서 인생샷을 남기고 응모하세요.</div>', faq:[], notice:'',
       desc:'미러볼 포토존 인증샷 응모 이벤트',
       openNoti:true, announce:'2026-05-06', payday:'2026-05-10', extra:50,
       rewardType:'coupon', rewardCoupon:'63빌딩 이용권', rewardGold:null, rewardPrize:null, rewardPrizeQty:null, rewardEtc:null,
@@ -2951,7 +2970,8 @@
       msTextQuestion:null, msTextPlaceholder:null, msTextMin:null, msTextMax:null, msTextPublic:false,
       start:'2026-04-01T00:00', end:'2026-04-30T23:59', parti:3240, st:'종료', show:false},
     {id:'ev_rave', name:'FIRST RUNNING RAVE 참가 응모', type:'선착순형',
-      bodyMode:'editor', bodyText:'여의도의 아침을 여는 러닝 크루 모집.', bodyImg:null, faq:[], notice:[],
+      thumbs:{main:fPlaceholderImg('RUNNING RAVE','#C25E3A'),cal:fPlaceholderImg('RAVE','#C25E3A'),share:null},
+      bodyText:'<div>여의도의 아침을 여는 러닝 크루 모집.</div>', faq:[], notice:'',
       desc:'SMCC × PLUS · 여의도의 아침을 여는 러닝',
       openNoti:true, announce:null, payday:'2026-05-12', extra:200,
       rewardType:'gold', rewardCoupon:null, rewardGold:3000, rewardPrize:null, rewardPrizeQty:null, rewardEtc:null,
@@ -3086,7 +3106,7 @@
       if(!isRaffle) document.getElementById('evF_announce').value='';
     }
     var dh=document.getElementById('evF_dateHint');
-    if(dh) dh.textContent=isRaffle?'응모 마감 후 이 날짜에 당첨자를 발표합니다. 보상 지급일은 STEP 7 보상 설정에서 입력합니다.':'선착순형은 당첨자 발표 절차가 없습니다. 보상 지급일은 STEP 7 보상 설정에서 입력합니다.';
+    if(dh) dh.textContent=isRaffle?'응모 마감 후 이 날짜에 당첨자를 발표합니다. 보상 지급일은 STEP 6 보상 설정에서 입력합니다.':'선착순형은 당첨자 발표 절차가 없습니다. 보상 지급일은 STEP 6 보상 설정에서 입력합니다.';
     var ph=document.getElementById('evF_paydayHint');
     if(ph) ph.textContent=isRaffle?'당첨자 발표일 이후 날짜로 지정하세요. 이 날짜에 보상이 지급됩니다.':'이 날짜에 선착순 당첨자에게 보상이 일괄 지급됩니다.';
     // 수동 선정 : 응모자 데이터 내려받기 버튼 (모달 우측 상단)
@@ -3094,22 +3114,21 @@
     if(dl) dl.style.display=(ty==='수동 선정'&&evCurId)?'':'none';
   }
   // ---- FAQ 항목별 입력 (최대 10개) ----
-  var evFaqState=[], evNoticeState=[];
+  var evFaqState=[];
   function evEsc(v){ return (v||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
   function renderEvFaq(){
     var list=document.getElementById('evF_faqList');
     list.innerHTML=evFaqState.map(function(f,i){
-      return '<div style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:8px;background:var(--surface2)">'+
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="mini" style="font-weight:700;color:var(--ink)">FAQ '+(i+1)+'</span>'+
-        '<button type="button" class="btn evfaq-del" data-i="'+i+'" style="margin-left:auto;padding:4px 9px;font-size:11.5px">삭제</button></div>'+
-        '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span class="mini" style="width:16px;font-weight:800;color:var(--gold)">Q</span><input class="finput evfaq-q" data-i="'+i+'" placeholder="질문을 입력하세요" value="'+evEsc(f.q)+'"></div>'+
-        '<div style="display:flex;gap:8px;align-items:flex-start"><span class="mini" style="width:16px;font-weight:800;color:var(--ink2);padding-top:8px">A</span><textarea class="finput evfaq-a" data-i="'+i+'" rows="2" style="resize:vertical" placeholder="답변을 입력하세요">'+evEsc(f.a)+'</textarea></div>'+
+      return '<div class="faq-wrap" style="margin-bottom:10px;position:relative">'+
+        '<button type="button" class="btn evfaq-del" data-i="'+i+'" style="position:absolute;top:-30px;right:0;padding:4px 10px;font-size:11.5px;border-radius:99px">삭제</button>'+
+        '<div class="faq-row"><span class="faq-key">Q.</span><input class="evfaq-q" data-i="'+i+'" placeholder="Question을 입력해주세요." value="'+evEsc(f.q)+'"></div>'+
+        '<div class="faq-row"><span class="faq-key">A.</span><textarea class="evfaq-a" data-i="'+i+'" rows="2" placeholder="Answer를 입력해주세요.">'+evEsc(f.a)+'</textarea></div>'+
       '</div>';
-    }).join('')||'<p class="mini" style="color:var(--ink3)">등록된 FAQ가 없습니다. 필요하면 항목을 추가하세요.</p>';
+    }).join('')||'<div class="faq-wrap"><p class="mini" style="color:var(--ink3);padding:6px 4px">등록된 FAQ가 없습니다. 우측 상단 &lsquo;항목 추가&rsquo;를 눌러 추가하세요.</p></div>';
     document.getElementById('evF_faqAdd').disabled=evFaqState.length>=10;
   }
   document.getElementById('evF_faqAdd').addEventListener('click',function(){
-    if(evFaqState.length>=10) return;
+    if(evFaqState.length>=10){ alert('FAQ는 최대 10개까지 등록할 수 있습니다.'); return; }
     evFaqState.push({q:'',a:''}); renderEvFaq();
   });
   document.getElementById('evF_faqList').addEventListener('click',function(e){
@@ -3120,29 +3139,6 @@
     var t=e.target;
     if(t.classList.contains('evfaq-q')) evFaqState[+t.dataset.i].q=t.value;
     else if(t.classList.contains('evfaq-a')) evFaqState[+t.dataset.i].a=t.value;
-  });
-  // ---- 안내사항 / 공지사항 항목별 입력 (최대 10개) ----
-  function renderEvNotice(){
-    var list=document.getElementById('evF_noticeList');
-    list.innerHTML=evNoticeState.map(function(v,i){
-      return '<div style="display:grid;grid-template-columns:26px 1fr 60px;gap:8px;align-items:center;margin-bottom:6px">'+
-        '<span class="mini" style="font-weight:700;color:var(--ink3);text-align:center">'+(i+1)+'</span>'+
-        '<input class="finput evnotice-v" data-i="'+i+'" placeholder="안내 문구를 한 줄씩 입력하세요" value="'+evEsc(v)+'">'+
-        '<button type="button" class="btn evnotice-del" data-i="'+i+'" style="padding:6px 8px;font-size:11.5px">삭제</button>'+
-      '</div>';
-    }).join('')||'<p class="mini" style="color:var(--ink3)">등록된 안내사항이 없습니다. 필요하면 항목을 추가하세요.</p>';
-    document.getElementById('evF_noticeAdd').disabled=evNoticeState.length>=10;
-  }
-  document.getElementById('evF_noticeAdd').addEventListener('click',function(){
-    if(evNoticeState.length>=10) return;
-    evNoticeState.push(''); renderEvNotice();
-  });
-  document.getElementById('evF_noticeList').addEventListener('click',function(e){
-    var d=e.target.closest('.evnotice-del'); if(!d) return;
-    evNoticeState.splice(+d.dataset.i,1); renderEvNotice();
-  });
-  document.getElementById('evF_noticeList').addEventListener('input',function(e){
-    var t=e.target; if(t.classList.contains('evnotice-v')) evNoticeState[+t.dataset.i]=t.value;
   });
   // ---- 수동 선정 : 응모자 데이터 엑셀(CSV) 내려받기 ----
   function evCsvCell(v){ v=(v==null?'':String(v)); return /[",\n]/.test(v)?('"'+v.replace(/"/g,'""')+'"'):v; }
@@ -3169,14 +3165,20 @@
     setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500);
   });
   // 미션 유형 (3종 고정) 서브필드 토글
-  var EV_MISSION_HINT={photo:'유저가 사진을 업로드하여 미션 참여 · 미션 세팅 시 사진 업로드 문구 작성 필요',apply:'응모하기 버튼 클릭을 통한 미션 참여',text:'담당자가 세팅한 질문에 유저가 글을 작성하여 미션 참여 · 미션 세팅 시 질문 작성 필요'};
+  var EV_MISSION_HINT={photo:'유저가 사진을 업로드하여 미션 참여 · 미션 세팅 시 업로드 안내 문구 작성 필요',apply:'응모하기 버튼 클릭을 통한 미션 참여',text:'담당자가 세팅한 안내 문구에 맞춰 유저가 글을 작성하여 미션 참여 · 미션 세팅 시 입력창 안내 문구 작성 필요'};
   function evSyncMissionType(){
     var mt=document.getElementById('evF_missionType').value;
+    document.querySelectorAll('#evF_missionTypeSeg button').forEach(function(x){x.classList.toggle('on',x.dataset.mt===mt);});
     document.querySelectorAll('.evms').forEach(function(x){x.style.display='none';});
     var box=document.getElementById('evF_ms_'+mt); if(box) box.style.display='';
+    var cw=document.getElementById('evF_msPhotoCountWrap'); if(cw) cw.style.display=(mt==='photo')?'':'none';
     var h=document.getElementById('evF_missionTypeHint'); if(h) h.textContent=EV_MISSION_HINT[mt]||'';
   }
-  document.getElementById('evF_missionType').addEventListener('change',evSyncMissionType);
+  document.getElementById('evF_missionTypeSeg').addEventListener('click',function(e){
+    var b=e.target.closest('[data-mt]'); if(!b) return;
+    document.getElementById('evF_missionType').value=b.dataset.mt;
+    evSyncMissionType();
+  });
   document.getElementById('evF_msApplyMultiOn').addEventListener('change',function(){
     document.getElementById('evF_msApplyMultiBox').style.display=this.checked?'':'none';
   });
@@ -3300,21 +3302,60 @@
     var t=e.target, i=+t.dataset.i; if(isNaN(i)) return;
     if(t.classList.contains('ev-fb-weight')) evFloorBoostState[i].weight=t.value;
   });
-  // 본문 에디터 / 이미지 토글
-  var evBodyImg=null;
-  document.getElementById('evF_bodySeg').addEventListener('click',function(e){
-    var b=e.target.closest('[data-bm]'); if(!b)return; var bm=b.dataset.bm;
-    document.getElementById('evF_bodyMode').value=bm;
-    document.querySelectorAll('#evF_bodySeg button').forEach(function(x){x.classList.toggle('on',x.dataset.bm===bm);});
-    document.getElementById('evF_bodyEditor').style.display=bm==='editor'?'':'none';
-    document.getElementById('evF_bodyImage').style.display=bm==='image'?'':'none';
+  // ---- 이벤트 대표 이미지 (썸네일 3종) ----
+  var evThumbs={main:null,cal:null,share:null}, evThumbSlot=null;
+  function renderEvThumbs(){
+    document.querySelectorAll('#evThumbGrid .imgslot').forEach(function(box){
+      var k=box.dataset.slot, v=evThumbs[k];
+      box.innerHTML=v?('<img src="'+v+'"><button type="button" class="del" data-del="'+k+'">✕</button>'):'<span class="plus">+</span>';
+    });
+  }
+  document.getElementById('evThumbGrid').addEventListener('click',function(e){
+    var del=e.target.closest('[data-del]');
+    if(del){ e.stopPropagation(); evThumbs[del.dataset.del]=null; renderEvThumbs(); return; }
+    var box=e.target.closest('.imgslot'); if(!box) return;
+    evThumbSlot=box.dataset.slot;
+    document.getElementById('evThumbFile').click();
   });
-  document.getElementById('evF_bodyImgBtn').addEventListener('click',function(){document.getElementById('evF_bodyImgInput').click();});
-  document.getElementById('evF_bodyImgInput').addEventListener('change',function(e){
-    var f=e.target.files&&e.target.files[0]; if(!f)return;
-    var r=new FileReader(); r.onload=function(){ evBodyImg=r.result;
-      document.getElementById('evF_bodyImgPreview').innerHTML='<img src="'+evBodyImg+'" style="max-width:100%;max-height:220px;border-radius:10px;border:1px solid var(--line)">';
-    }; r.readAsDataURL(f);
+  document.getElementById('evThumbFile').addEventListener('change',function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f||!evThumbSlot) return;
+    var r=new FileReader();
+    r.onload=function(){ evThumbs[evThumbSlot]=r.result; renderEvThumbs(); };
+    r.readAsDataURL(f);
+    this.value='';
+  });
+
+  // ---- 리치 텍스트 에디터 (본문 / 공지·유의사항) ----
+  function rteText(el){ return ((el.innerText!=null?el.innerText:el.textContent)||'').replace(/\u00a0/g,' ').trim(); }
+  function rteSync(areaId,hiddenId){
+    var a=document.getElementById(areaId);
+    document.getElementById(hiddenId).value=rteText(a)?a.innerHTML:'';
+  }
+  function rteSet(areaId,hiddenId,html){
+    var a=document.getElementById(areaId);
+    a.innerHTML=html||'';
+    document.getElementById(hiddenId).value=html||'';
+  }
+  var RTE_PAIRS=[['evF_bodyRte','evF_bodyText'],['evF_noticeRte','evF_noticeText']];
+  RTE_PAIRS.forEach(function(p){
+    var area=document.getElementById(p[0]);
+    area.addEventListener('input',function(){ rteSync(p[0],p[1]); });
+    area.addEventListener('blur',function(){ rteSync(p[0],p[1]); });
+    var bar=area.parentElement.querySelector('.rte-bar');
+    bar.addEventListener('mousedown',function(e){ if(e.target.closest('button')) e.preventDefault(); });
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('[data-cmd]'); if(!b) return;
+      area.focus();
+      var cmd=b.dataset.cmd;
+      if(cmd==='createLink'){
+        var url=prompt('연결할 주소를 입력하세요','https://');
+        if(!url) return;
+        document.execCommand('createLink',false,url);
+      } else {
+        document.execCommand(cmd,false,null);
+      }
+      rteSync(p[0],p[1]);
+    });
   });
   // 보상 토글 (쿠폰/골드/경품/디지털굿즈/기타) — 공통 처리기
   function rewardMap(p){ return {coupon:p+'RewardCoupon',gold:p+'RewardGold',prize:p+'RewardPrize',digital:p+'RewardDigital',etc:p+'RewardEtc'}; }
@@ -3338,7 +3379,7 @@
     d.rewardType=rw; d.rewardCoupon=null; d.rewardGold=null; d.rewardPrize=null; d.rewardPrizeQty=null; d.rewardEtc=null; d.rewardDigital=null;
     if(rw==='coupon'){ d.rewardCoupon=document.getElementById(couponSelId).value||null; }
     else if(rw==='gold'){ var g=document.getElementById(goldId).value; d.rewardGold=g!==''?+g:null; }
-    else if(rw==='prize'){ d.rewardPrize=document.getElementById(prizeTextId).value.trim()||null; var q=document.getElementById(prizeQtyId).value; d.rewardPrizeQty=q!==''?+q:null; }
+    else if(rw==='prize'){ d.rewardPrize=document.getElementById(prizeTextId).value.trim()||null; var qe=prizeQtyId?document.getElementById(prizeQtyId):null; var q=qe?qe.value:''; d.rewardPrizeQty=q!==''?+q:null; }
     else if(rw==='digital'){ var dg=digitalTextId?document.getElementById(digitalTextId):null; d.rewardDigital=dg?(dg.value.trim()||null):null; }
     else { var ec=etcId?document.getElementById(etcId):null; d.rewardEtc=ec?(ec.value.trim()||null):null; }
   }
@@ -3347,7 +3388,7 @@
     fillEventCoupons(couponSelId, ev&&ev.rewardCoupon?ev.rewardCoupon:'');
     document.getElementById(goldId).value=ev&&ev.rewardGold?ev.rewardGold:'';
     document.getElementById(prizeTextId).value=ev&&ev.rewardPrize?ev.rewardPrize:'';
-    document.getElementById(prizeQtyId).value=ev&&ev.rewardPrizeQty?ev.rewardPrizeQty:'';
+    var pq=prizeQtyId?document.getElementById(prizeQtyId):null; if(pq) pq.value=ev&&ev.rewardPrizeQty?ev.rewardPrizeQty:'';
     var ecEl=etcId?document.getElementById(etcId):null; if(ecEl) ecEl.value=ev&&ev.rewardEtc?ev.rewardEtc:'';
     if(digitalTextId){ var de=document.getElementById(digitalTextId); if(de) de.value=ev&&ev.rewardDigital?ev.rewardDigital:''; }
     if(['coupon','gold','prize'].indexOf(rw)===-1 && !document.querySelector('#'+segId+' [data-rw="'+rw+'"]')) rw='coupon';
@@ -3389,47 +3430,35 @@
     var mt0=ev&&ev.missionType?ev.missionType:'photo';
     document.getElementById('evF_missionType').value=mt0;
     document.getElementById('evF_msPhotoGuide').value=ev&&ev.msPhotoGuide?ev.msPhotoGuide:'';
-    document.getElementById('evF_msPhotoMaxMb').value=ev&&ev.msPhotoMaxMb!=null?ev.msPhotoMaxMb:'';
     document.getElementById('evF_msPhotoMaxCount').value=ev&&ev.msPhotoMaxCount!=null?ev.msPhotoMaxCount:'';
-    document.querySelectorAll('.evms-photoext').forEach(function(cb){cb.checked=(ev&&ev.msPhotoExt)?(ev.msPhotoExt.indexOf(cb.value)>-1):true;});
     document.getElementById('evF_msApplyText').value=ev&&ev.msApplyText?ev.msApplyText:'';
     document.getElementById('evF_msApplyDone').value=ev&&ev.msApplyDone?ev.msApplyDone:'';
     document.getElementById('evF_msApplyNotice').value=ev&&ev.msApplyNotice?ev.msApplyNotice:'';
     document.getElementById('evF_msApplyMultiOn').checked=!!(ev&&ev.msApplyMultiOn);
     document.getElementById('evF_msApplyMultiBox').style.display=(ev&&ev.msApplyMultiOn)?'':'none';
     document.getElementById('evF_msApplyMax').value=ev&&ev.msApplyMax!=null?ev.msApplyMax:'';
-    document.getElementById('evF_msTextQuestion').value=ev&&ev.msTextQuestion?ev.msTextQuestion:'';
-    document.getElementById('evF_msTextPlaceholder').value=ev&&ev.msTextPlaceholder?ev.msTextPlaceholder:'';
-    document.getElementById('evF_msTextMin').value=ev&&ev.msTextMin!=null?ev.msTextMin:'';
-    document.getElementById('evF_msTextMax').value=ev&&ev.msTextMax!=null?ev.msTextMax:'';
-    document.getElementById('evF_msTextPublic').checked=!!(ev&&ev.msTextPublic);
+    document.getElementById('evF_msTextPlaceholder').value=ev?(ev.msTextPlaceholder||ev.msTextQuestion||''):'';
     evSyncMissionType();
-    // 본문
-    evBodyImg=ev&&ev.bodyImg?ev.bodyImg:null;
-    var bm=ev&&ev.bodyMode?ev.bodyMode:'editor';
-    document.getElementById('evF_bodyMode').value=bm;
-    document.querySelectorAll('#evF_bodySeg button').forEach(function(x){x.classList.toggle('on',x.dataset.bm===bm);});
-    document.getElementById('evF_bodyEditor').style.display=bm==='editor'?'':'none';
-    document.getElementById('evF_bodyImage').style.display=bm==='image'?'':'none';
-    document.getElementById('evF_bodyText').value=ev&&ev.bodyText?ev.bodyText:(ev?ev.desc:'');
+    // 대표 이미지 · 본문 · FAQ · 공지
+    evThumbs=(ev&&ev.thumbs)?{main:ev.thumbs.main||null,cal:ev.thumbs.cal||null,share:ev.thumbs.share||null}:{main:null,cal:null,share:null};
+    renderEvThumbs();
+    rteSet('evF_bodyRte','evF_bodyText', ev?(ev.bodyText||ev.desc||''):'');
     evFaqState=(ev&&Array.isArray(ev.faq))?JSON.parse(JSON.stringify(ev.faq)):[];
     renderEvFaq();
-    evNoticeState=(ev&&Array.isArray(ev.notice))?ev.notice.slice():[];
-    renderEvNotice();
-    document.getElementById('evF_bodyImgPreview').innerHTML=evBodyImg?'<img src="'+evBodyImg+'" style="max-width:100%;max-height:220px;border-radius:10px;border:1px solid var(--line)">':'';
+    rteSet('evF_noticeRte','evF_noticeText', ev?(typeof ev.notice==='string'?ev.notice:(Array.isArray(ev.notice)?ev.notice.map(function(v){return '<div>· '+v+'</div>';}).join(''):'')):'');
     // 랜덤 추첨형 / 수동 선정
     document.getElementById('evF_start').value=ev?evToInput(ev.start):'';
     document.getElementById('evF_end').value=ev&&ev.end?evToInput(ev.end):'';
-    // 공통 : 당첨자 발표일 · 보상 지급일 (STEP 3)
+    // 공통 : 당첨자 발표일 (STEP 2) · 보상 지급일 (STEP 6)
     document.getElementById('evF_announce').value=ev&&ev.announce?ev.announce:'';
     document.getElementById('evF_payday').value=ev&&ev.payday?ev.payday:'';
     document.getElementById('evF_openNoti').checked=ev?!!ev.openNoti:false;
     document.getElementById('evF_winners').value=ev&&ev.extra!=null?ev.extra:'';
-    fillRewardUI('evF_rewardSeg',rewardMap('evF_'),ev,'evF_couponSel','evF_goldAmt','evF_prizeText','evF_prizeQty',null,null);
+    fillRewardUI('evF_rewardSeg',rewardMap('evF_'),ev,'evF_couponSel','evF_goldAmt','evF_prizeText',null,null,null);
     // 선착순형
     document.getElementById('evF_fOpenNoti').checked=ev?!!ev.openNoti:false;
     document.getElementById('evF_limit').value=ev&&ev.extra!=null?ev.extra:'';
-    fillRewardUI('evF_fRewardSeg',rewardMap('evF_f'),ev,'evF_fCouponSel','evF_fGoldAmt','evF_fPrizeText','evF_fPrizeQty',null,null);
+    fillRewardUI('evF_fRewardSeg',rewardMap('evF_f'),ev,'evF_fCouponSel','evF_fGoldAmt','evF_fPrizeText',null,null,null);
     // 공통
     document.getElementById('evF_err').textContent='';
     document.getElementById('evDelete').style.display=ev?'':'none';
@@ -3469,7 +3498,7 @@
   function wnPayLabel(ev){
     if(ev.rewardType==='coupon') return '쿠폰 · '+(ev.rewardCoupon||'');
     if(ev.rewardType==='gold') return '골드 · '+(ev.rewardGold||0).toLocaleString('en-US')+'G';
-    return '실물 경품 · '+(ev.rewardPrize||'');
+    return '실물 경품 지급';
   }
   function wnAutoPay(ev){ return ev.rewardType==='coupon'||ev.rewardType==='gold'; }
 
@@ -3714,10 +3743,12 @@
     var ty=document.getElementById('evF_type').value;
     var name=document.getElementById('evF_name').value.trim();
     if(!name){ err.textContent='이벤트명을 입력하세요.'; return; }
-    var bodyMode=document.getElementById('evF_bodyMode').value;
+    if(!evThumbs.main){ err.textContent='① 상세 페이지 상단 대표 이미지를 등록하세요.'; return; }
+    if(!evThumbs.cal){ err.textContent='② 캘린더 이미지를 등록하세요.'; return; }
+    rteSync('evF_bodyRte','evF_bodyText'); rteSync('evF_noticeRte','evF_noticeText');
     var bodyText=document.getElementById('evF_bodyText').value.trim();
-    if(bodyMode==='editor' && !bodyText){ err.textContent='이벤트 본문을 입력하세요.'; return; }
-    if(bodyMode==='image' && !evBodyImg){ err.textContent='본문 이미지를 등록하세요.'; return; }
+    if(!bodyText){ err.textContent='이벤트 본문을 입력하세요.'; return; }
+    var noticeText=document.getElementById('evF_noticeText').value.trim();
     var floorMinOn=document.getElementById('evF_floorMinOn').checked;
     var floorMode=document.getElementById('evF_floorMode').value;
     var floorMin=null, floorMax=null, floorList=null;
@@ -3755,10 +3786,11 @@
         }
       }
     }
-    var data={ name:name, type:ty, bodyMode:bodyMode, bodyText:bodyText, bodyImg:evBodyImg||null,
+    var plain=rteText(document.getElementById('evF_bodyRte')).replace(/\s+/g,' ');
+    var data={ name:name, type:ty, thumbs:{main:evThumbs.main,cal:evThumbs.cal,share:evThumbs.share}, bodyText:bodyText,
       faq:evFaqState.filter(function(f){return (f.q&&f.q.trim())||(f.a&&f.a.trim());}).map(function(f){return {q:(f.q||'').trim(),a:(f.a||'').trim()};}),
-      notice:evNoticeState.map(function(v){return (v||'').trim();}).filter(function(v){return v;}),
-      desc:bodyMode==='image'?'이미지 본문':(bodyText.length>40?bodyText.slice(0,40)+'…':bodyText),
+      notice:noticeText,
+      desc:plain.length>40?plain.slice(0,40)+'…':plain,
       openNoti:false, announce:null, payday:null, rewardType:null, rewardCoupon:null, rewardGold:null, rewardPrize:null, rewardPrizeQty:null, rewardEtc:null, extra:null,
       store:document.getElementById('evF_storeSel').value||null,
       floorMode:floorMinOn?floorMode:'range', floorMin:floorMin, floorMax:floorMax, floorList:floorList, floorBoosts:floorBoosts,
@@ -3771,14 +3803,11 @@
       data.missionType=mt;
       if(mt==='photo'){
         data.msPhotoGuide=document.getElementById('evF_msPhotoGuide').value.trim()||null;
-        data.msPhotoMaxMb=document.getElementById('evF_msPhotoMaxMb').value!==''?+document.getElementById('evF_msPhotoMaxMb').value:null;
         data.msPhotoMaxCount=document.getElementById('evF_msPhotoMaxCount').value!==''?+document.getElementById('evF_msPhotoMaxCount').value:null;
-        data.msPhotoExt=Array.prototype.filter.call(document.querySelectorAll('.evms-photoext'),function(cb){return cb.checked;}).map(function(cb){return cb.value;});
+        data.msPhotoMaxMb=10; data.msPhotoExt=['jpg','png','gif','webp'];
         if(!data.msPhotoGuide){ err.textContent='업로드 안내 문구를 입력하세요.'; return; }
-        if(!data.msPhotoMaxMb){ err.textContent='최대 용량(MB)을 입력하세요.'; return; }
         if(!data.msPhotoMaxCount){ err.textContent='최대 업로드 장수를 입력하세요.'; return; }
         if(data.msPhotoMaxCount>5){ err.textContent='최대 업로드 장수는 5장 이내로 입력하세요.'; return; }
-        if(!data.msPhotoExt.length){ err.textContent='허용 확장자를 1개 이상 선택하세요.'; return; }
       } else if(mt==='apply'){
         data.msApplyText=document.getElementById('evF_msApplyText').value.trim()||null;
         data.msApplyDone=document.getElementById('evF_msApplyDone').value.trim()||null;
@@ -3790,35 +3819,31 @@
         if(data.msApplyMultiOn && (!data.msApplyMax||data.msApplyMax<2)){ err.textContent='1인 최대 응모 횟수를 2회 이상으로 입력하세요.'; return; }
         if(!data.msApplyMultiOn) data.msApplyMax=1;
       } else if(mt==='text'){
-        data.msTextQuestion=document.getElementById('evF_msTextQuestion').value.trim()||null;
         data.msTextPlaceholder=document.getElementById('evF_msTextPlaceholder').value.trim()||null;
-        data.msTextMin=document.getElementById('evF_msTextMin').value!==''?+document.getElementById('evF_msTextMin').value:null;
-        data.msTextMax=document.getElementById('evF_msTextMax').value!==''?+document.getElementById('evF_msTextMax').value:null;
-        data.msTextPublic=document.getElementById('evF_msTextPublic').checked;
-        if(!data.msTextQuestion){ err.textContent='글등록 미션의 질문을 입력하세요.'; return; }
-        if(!data.msTextMax){ err.textContent='최대 글자수를 입력하세요.'; return; }
-        if(data.msTextMin && data.msTextMin>data.msTextMax){ err.textContent='최소 글자수는 최대 글자수보다 작아야 합니다.'; return; }
+        data.msTextQuestion=data.msTextPlaceholder;
+        data.msTextMin=20; data.msTextMax=500; data.msTextPublic=false;
+        if(!data.msTextPlaceholder){ err.textContent='입력창 안내 문구를 입력하세요.'; return; }
       }
     }
     var sVal=document.getElementById('evF_start').value, eVal=document.getElementById('evF_end').value, always=false;
     if(!sVal||!eVal){ err.textContent='이벤트 기간(시작·종료)을 입력하세요.'; return; }
-    // STEP 3 공통 : 당첨자 발표일 · 보상 지급일
+    // 공통 : 당첨자 발표일 (STEP 2) · 보상 지급일 (STEP 6)
     data.announce=document.getElementById('evF_announce').value||null;
     data.payday=document.getElementById('evF_payday').value||null;
     if(ty==='랜덤 추첨형'||ty==='수동 선정'){
       data.openNoti=document.getElementById('evF_openNoti').checked;
       data.extra=document.getElementById('evF_winners').value!==''?+document.getElementById('evF_winners').value:null;
-      readReward('evF_rewardSeg','evF_','evF_couponSel','evF_goldAmt','evF_prizeText','evF_prizeQty',null,null,data);
+      readReward('evF_rewardSeg','evF_','evF_couponSel','evF_goldAmt','evF_prizeText',null,null,null,data);
     } else if(ty==='선착순형'){
       data.openNoti=document.getElementById('evF_fOpenNoti').checked;
       data.announce=null;
       data.extra=document.getElementById('evF_limit').value!==''?+document.getElementById('evF_limit').value:null;
-      readReward('evF_fRewardSeg','evF_f','evF_fCouponSel','evF_fGoldAmt','evF_fPrizeText','evF_fPrizeQty',null,null,data);
+      readReward('evF_fRewardSeg','evF_f','evF_fCouponSel','evF_fGoldAmt','evF_fPrizeText',null,null,null,data);
     }
     if(data.announce && data.payday && new Date(data.payday)<new Date(data.announce)){ err.textContent='보상 지급일은 당첨자 발표일 이후여야 합니다.'; return; }
     if(data.rewardType==='coupon' && !data.rewardCoupon){ err.textContent='지급할 쿠폰을 선택하세요.'; return; }
     if(data.rewardType==='gold' && !data.rewardGold){ err.textContent='지급 골드 수량을 입력하세요.'; return; }
-    if(data.rewardType==='prize' && !data.rewardPrize){ err.textContent='실물 경품 내용을 입력하세요.'; return; }
+    if(data.rewardType==='prize' && !data.rewardPrize){ err.textContent='경품 지급 안내 문구를 입력하세요.'; return; }
     data.start=evDay(sVal); data.end=eVal?evDay(eVal):null;
     data.st=evCalcStatusFrom(sVal,eVal,always);
     if(evCurId){ var ev=events.filter(function(x){return x.id===evCurId;})[0]; if(ev) Object.keys(data).forEach(function(k){ev[k]=data[k];}); }
@@ -3930,7 +3955,7 @@
   function rewardLabel(d){
     if(d.rewardType==='coupon'||(!d.rewardType&&d.reward&&/쿠폰/.test(d.reward))) return d.rewardCoupon?('쿠폰 · '+d.rewardCoupon):(d.reward||'쿠폰');
     if(d.rewardType==='gold') return '골드 '+(d.rewardGold||0).toLocaleString('en-US')+'G';
-    if(d.rewardType==='prize') return '실물 경품 · '+(d.rewardPrize||'')+(d.rewardPrizeQty?' ×'+d.rewardPrizeQty:'');
+    if(d.rewardType==='prize') return d.rewardPrizeQty?('실물 경품 · '+(d.rewardPrize||'')+' ×'+d.rewardPrizeQty):'실물 경품 지급';
     if(d.rewardType==='digital') return '디지털 굿즈 · '+(d.rewardDigital||'');
     if(d.rewardType==='etc') return '기타 · '+(d.rewardEtc||'');
     return d.reward||'-';
@@ -4164,65 +4189,52 @@
   // ===================================================================
   var promos=[
     {id:'pm_art_night', name:'가을밤 야간권 얼리버드 30%', sub:'평일 야간 입장권을 미리 예매하면 30% 할인',
-      store:'59F · 63아트 전망대', badge:'전망대', memo:'박OO 매니저 / 9월 광고 요청',
-      type:'할인', discMode:'rate', discVal:30, discTarget:'야간 전망대 입장권',
-      giftText:null, giftQty:null, bogoText:null, setText:null, setPrice:null, expText:null, expCap:null, etcText:null,
-      cond:'앱 화면 제시 시 적용 · 평일 18시 이후 입장 고객 한정', caution:'타 할인과 중복 적용 불가 · 공휴일 제외',
-      img:fPlaceholderImg('63아트 전망대','#2C5C8F'), bodyMode:'editor', bodyText:'가을밤, 여의도 야경을 30% 할인된 가격으로 만나보세요.', bodyImg:null,
-      start:'2026-09-22T00:00', end:'2026-10-31T23:59', always:false,
-      limitOn:false, days:[], timeFrom:'', timeTo:'',
-      action:'detail', couponName:null, url:'',
-      order:1, show:true, push:false, views:1240, st:'진행중'}
+      store:'59F · 63아트 전망대',
+      type:'coupon', couponName:'59F · 63 레스토랑 · 식음료 10% 할인 쿠폰',
+      thumbs:{main:fPlaceholderImg('63아트 전망대','#2C5C8F'),list:fPlaceholderImg('가을밤 야간권','#2C5C8F'),share:null},
+      bodyText:'<div>가을밤, 여의도 야경을 30% 할인된 가격으로 만나보세요.</div>',
+      faq:[{q:'쿠폰은 언제까지 사용할 수 있나요?',a:'발급일로부터 프로모션 종료일까지 사용할 수 있습니다.'}],
+      notice:'<ul><li>타 할인과 중복 적용 불가</li><li>공휴일 제외</li></ul>',
+      start:'2026-09-22T00:00', end:'2026-10-31T23:59',
+      floorMin:null, floorMax:null,
+      show:true, push:false, views:1240, st:'진행중'}
   ];
-  var PM_TYPE_HINT={'할인':'정률(%) 또는 정액(원) 할인을 제공하는 가장 일반적인 유형입니다','증정/사은품':'구매 고객에게 사은품이나 추가 제공품을 주는 유형입니다','1+1':'동일/지정 품목을 하나 더 제공하는 유형입니다','세트/패키지':'2개 이상 상품을 묶어 특별가로 판매하는 유형입니다','체험/무료':'무료 체험·도슨트·시식 등 참여형 혜택을 제공하는 유형입니다','기타':'위 유형에 해당하지 않는 혜택을 직접 작성합니다'};
-  var PM_ACT_LABEL={detail:'상세 보기',coupon:'쿠폰 다운로드',store:'매장 상세 이동',url:'외부 링크'};
-  var pmCurId=null, pmImg=null, pmBodyImg=null, pmDays=[];
+  var PM_TYPE_LABEL={coupon:'할인 쿠폰',promo:'단순 홍보'};
+  var PM_TYPE_HINT={coupon:'매장이 제공하는 쿠폰을 앱에서 발급합니다. 카드 하단에 \u2018쿠폰 받기\u2019 버튼이 노출됩니다.',promo:'쿠폰·예약 없이 매장의 혜택 소식만 알립니다. 카드를 누르면 상세 본문으로 이동합니다.'};
+  var pmTyCls={coupon:'blue',promo:'gray'};
+  var pmCurId=null, pmThumbs={main:null,list:null,share:null}, pmThumbSlot=null, pmFaqState=[];
 
   function pmDate(s){ if(!s) return '-'; var p=s.slice(0,10).split('-'); return p[0].slice(2)+'.'+p[1]+'.'+p[2]; }
   function pmToInput(s){ return s?(s.length>10?s:s+'T00:00'):''; }
-  function pmPeriodText(x){
-    if(x.limitOn && x.days && x.days.length){
-      var d='매주 '+x.days.join('·')+'요일';
-      if(x.timeFrom||x.timeTo) d+=' '+(x.timeFrom||'')+'~'+(x.timeTo||'');
-      return d;
-    }
-    if(x.always) return '상시';
-    return pmDate(x.start)+' ~ '+pmDate(x.end);
+  function pmPeriodText(x){ return pmDate(x.start)+' ~ '+pmDate(x.end); }
+  function pmLinkText(x){
+    if(x.type==='coupon') return x.couponName||'-';
+    return '상세 본문 이동';
   }
-  function pmBenefitText(x){
-    if(x.type==='할인') return (x.discMode==='rate'?(x.discVal+'% 할인'):((+x.discVal||0).toLocaleString('en-US')+'원 할인'))+(x.discTarget?(' · '+x.discTarget):'');
-    if(x.type==='증정/사은품') return (x.giftText||'증정')+(x.giftQty?(' · 일 '+x.giftQty+'개'):'');
-    if(x.type==='1+1') return '1+1 · '+(x.bogoText||'');
-    if(x.type==='세트/패키지') return (x.setText||'세트 구성')+(x.setPrice?(' · '+(+x.setPrice).toLocaleString('en-US')+'원'):'');
-    if(x.type==='체험/무료') return (x.expText||'체험')+(x.expCap?(' · 회차당 '+x.expCap+'명'):'');
-    return x.etcText||'-';
-  }
-  function pmCalcStatus(sVal,eVal,always){
+  function pmCalcStatus(sVal,eVal){
     var today=new Date('2026-06-01');
     if(!sVal) return '예약';
     if(new Date(sVal)>today) return '예약';
-    if(!always && eVal && new Date(eVal)<today) return '종료';
+    if(eVal && new Date(eVal)<today) return '종료';
     return '진행중';
   }
-  var pmTyCls={'할인':'blue','증정/사은품':'green','1+1':'gold','세트/패키지':'gray','체험/무료':'green','기타':'gray'};
 
   function renderPromoRows(list){
     document.getElementById('promoRows').innerHTML=list.map(function(x){
       var dis=x.st==='종료'?'opacity:.55;':'';
       return '<tr data-id="'+x.id+'">'+
-        '<td><img src="'+x.img+'" style="width:52px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)"></td>'+
+        '<td><img src="'+(x.thumbs&&x.thumbs.list||x.img)+'" style="width:52px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)"></td>'+
         '<td><div class="uname">'+x.name+'</div><div class="mini">'+(x.sub||'')+'</div></td>'+
         '<td class="mini">'+(x.store||'-')+'</td>'+
-        '<td><span class="tag '+(pmTyCls[x.type]||'gray')+'">'+x.type+'</span><div class="mini" style="margin-top:4px">'+pmBenefitText(x)+'</div></td>'+
+        '<td><span class="tag '+(pmTyCls[x.type]||'gray')+'">'+(PM_TYPE_LABEL[x.type]||x.type)+'</span></td>'+
+        '<td class="mini" style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+pmLinkText(x)+'</td>'+
         '<td class="mini">'+pmPeriodText(x)+'</td>'+
-        '<td class="mini">'+PM_ACT_LABEL[x.action]+(x.action==='coupon'&&x.couponName?('<div class="mini" style="color:var(--ink3)">'+x.couponName+'</div>'):'')+'</td>'+
         '<td class="num">'+(x.views||0).toLocaleString('en-US')+'</td>'+
         '<td><span class="tag '+stCls[x.st]+'">'+x.st+'</span></td>'+
         '<td style="text-align:center;'+dis+'"><label class="tgl"><input type="checkbox" class="pm-show" data-id="'+x.id+'"'+(x.show?' checked':'')+(x.st==='종료'?' disabled':'')+'><span class="track"></span><span class="knob"></span></label></td>'+
-        '<td style="text-align:center">'+(x.order||'-')+'</td>'+
         '<td style="text-align:right;white-space:nowrap"><button class="btn pm-edit" data-id="'+x.id+'" style="padding:6px 12px;font-size:12px">관리</button></td>'+
       '</tr>';
-    }).join('')||'<tr><td colspan="11" class="mini" style="text-align:center;padding:24px;color:var(--ink3)">등록된 매장 프로모션이 없습니다.</td></tr>';
+    }).join('')||'<tr><td colspan="10" class="mini" style="text-align:center;padding:24px;color:var(--ink3)">등록된 매장 프로모션이 없습니다.</td></tr>';
   }
   function promoMatch(x){
     var v=function(id){return document.getElementById(id).value.trim();};
@@ -4238,7 +4250,7 @@
     return true;
   }
   var pagerPromo=makePager('pgPromos',function(){
-    var list=promos.filter(promoMatch).sort(function(a,b){return (a.order||999)-(b.order||999);});
+    var list=promos.filter(promoMatch).sort(function(a,b){return (b.start||'').localeCompare(a.start||'');});
     var el=document.getElementById('promoCount'); if(el) el.textContent='검색 결과 '+list.length+'개';
     renderEventSub();
     return list;
@@ -4267,6 +4279,7 @@
   window.closePromo=function(){ document.getElementById('promoModal').classList.remove('open'); };
   function pmSyncType(){
     var ty=document.getElementById('pmF_type').value;
+    document.querySelectorAll('#pmF_typeSeg button').forEach(function(x){x.classList.toggle('on',x.dataset.pt===ty);});
     document.querySelectorAll('.pmtype').forEach(function(x){x.style.display='none';});
     var box=document.getElementById('pmT_'+ty); if(box) box.style.display='';
     document.getElementById('pmF_typeHint').textContent=PM_TYPE_HINT[ty]||'';
@@ -4274,53 +4287,103 @@
   document.getElementById('pmF_typeSeg').addEventListener('click',function(e){
     var b=e.target.closest('[data-pt]'); if(!b) return;
     document.getElementById('pmF_type').value=b.dataset.pt;
-    this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset.pt===b.dataset.pt);});
     pmSyncType();
   });
-  document.getElementById('pmF_discSeg').addEventListener('click',function(e){
-    var b=e.target.closest('[data-dm]'); if(!b) return;
-    document.getElementById('pmF_discMode').value=b.dataset.dm;
-    this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset.dm===b.dataset.dm);});
-    document.getElementById('pmF_discUnit').textContent=b.dataset.dm==='rate'?'%':'원';
+  // 상세 본문 에디터
+  (function(){
+    var area=document.getElementById('pmF_bodyRte');
+    area.addEventListener('input',function(){ rteSync('pmF_bodyRte','pmF_bodyText'); });
+    area.addEventListener('blur',function(){ rteSync('pmF_bodyRte','pmF_bodyText'); });
+    var bar=area.parentElement.querySelector('.rte-bar');
+    bar.addEventListener('mousedown',function(e){ if(e.target.closest('button')) e.preventDefault(); });
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('[data-cmd]'); if(!b) return;
+      area.focus();
+      if(b.dataset.cmd==='createLink'){ var u=prompt('연결할 주소를 입력하세요','https://'); if(!u) return; document.execCommand('createLink',false,u); }
+      else document.execCommand(b.dataset.cmd,false,null);
+      rteSync('pmF_bodyRte','pmF_bodyText');
+    });
+  })();
+  // 대표 이미지 3종
+  function renderPmThumbs(){
+    document.querySelectorAll('#pmThumbGrid .imgslot').forEach(function(box){
+      var k=box.dataset.slot, v=pmThumbs[k];
+      box.innerHTML=v?('<img src="'+v+'"><button type="button" class="del" data-del="'+k+'">✕</button>'):'<span class="plus">+</span>';
+    });
+  }
+  document.getElementById('pmThumbGrid').addEventListener('click',function(e){
+    var del=e.target.closest('[data-del]');
+    if(del){ e.stopPropagation(); pmThumbs[del.dataset.del]=null; renderPmThumbs(); return; }
+    var box=e.target.closest('.imgslot'); if(!box) return;
+    pmThumbSlot=box.dataset.slot;
+    document.getElementById('pmThumbFile').click();
   });
-  document.getElementById('pmF_bodySeg').addEventListener('click',function(e){
-    var b=e.target.closest('[data-bm]'); if(!b) return;
-    document.getElementById('pmF_bodyMode').value=b.dataset.bm;
-    this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset.bm===b.dataset.bm);});
-    document.getElementById('pmF_bodyEditor').style.display=b.dataset.bm==='editor'?'':'none';
-    document.getElementById('pmF_bodyImageBox').style.display=b.dataset.bm==='image'?'':'none';
-  });
-  document.getElementById('pmF_actSeg').addEventListener('click',function(e){
-    var b=e.target.closest('[data-ac]'); if(!b) return;
-    document.getElementById('pmF_action').value=b.dataset.ac;
-    this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset.ac===b.dataset.ac);});
-    document.querySelectorAll('.pmact').forEach(function(x){x.style.display='none';});
-    document.getElementById('pmA_'+b.dataset.ac).style.display='';
-  });
-  document.getElementById('pmF_always').addEventListener('change',function(){
-    document.getElementById('pmF_end').disabled=this.checked;
-    if(this.checked) document.getElementById('pmF_end').value='';
-  });
-  document.getElementById('pmF_limitOn').addEventListener('change',function(){
-    document.getElementById('pmF_limitBox').style.display=this.checked?'':'none';
-  });
-  document.getElementById('pmF_dayChips').addEventListener('click',function(e){
-    var c=e.target.closest('.chip'); if(!c) return;
-    c.classList.toggle('active');
-    pmDays=Array.prototype.slice.call(this.querySelectorAll('.chip.active')).map(function(x){return x.dataset.day;});
-  });
-  document.getElementById('pmImgBtn').addEventListener('click',function(){document.getElementById('pmImgFile').click();});
-  document.getElementById('pmImgFile').addEventListener('change',function(e){
-    var f=e.target.files&&e.target.files[0]; if(!f) return;
-    var r=new FileReader(); r.onload=function(){ pmImg=r.result; document.getElementById('pmImgPreview').innerHTML='<img src="'+pmImg+'" style="width:120px;height:160px;object-fit:cover;border-radius:10px;border:1px solid var(--line)">'; };
+  document.getElementById('pmThumbFile').addEventListener('change',function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f||!pmThumbSlot) return;
+    var r=new FileReader();
+    r.onload=function(){ pmThumbs[pmThumbSlot]=r.result; renderPmThumbs(); };
     r.readAsDataURL(f);
+    this.value='';
   });
-  document.getElementById('pmBodyImgBtn').addEventListener('click',function(){document.getElementById('pmBodyImgFile').click();});
-  document.getElementById('pmBodyImgFile').addEventListener('change',function(e){
-    var f=e.target.files&&e.target.files[0]; if(!f) return;
-    var r=new FileReader(); r.onload=function(){ pmBodyImg=r.result; document.getElementById('pmBodyImgPreview').innerHTML='<img src="'+pmBodyImg+'" style="max-width:100%;border-radius:10px;border:1px solid var(--line)">'; };
-    r.readAsDataURL(f);
+  // FAQ (항목 추가형)
+  function renderPmFaq(){
+    var list=document.getElementById('pmF_faqList');
+    list.innerHTML=pmFaqState.map(function(f,i){
+      return '<div class="faq-wrap" style="margin-bottom:10px;position:relative">'+
+        '<button type="button" class="btn pmfaq-del" data-i="'+i+'" style="position:absolute;top:-30px;right:0;padding:4px 10px;font-size:11.5px;border-radius:99px">삭제</button>'+
+        '<div class="faq-row"><span class="faq-key">Q.</span><input class="pmfaq-q" data-i="'+i+'" placeholder="Question을 입력해주세요." value="'+evEsc(f.q)+'"></div>'+
+        '<div class="faq-row"><span class="faq-key">A.</span><textarea class="pmfaq-a" data-i="'+i+'" rows="2" placeholder="Answer를 입력해주세요.">'+evEsc(f.a)+'</textarea></div>'+
+      '</div>';
+    }).join('')||'<div class="faq-wrap"><p class="mini" style="color:var(--ink3);padding:6px 4px">등록된 FAQ가 없습니다. 우측 상단 &lsquo;항목 추가&rsquo;를 눌러 추가하세요.</p></div>';
+    document.getElementById('pmF_faqAdd').disabled=pmFaqState.length>=10;
+  }
+  document.getElementById('pmF_faqAdd').addEventListener('click',function(){
+    if(pmFaqState.length>=10){ alert('FAQ는 최대 10개까지 등록할 수 있습니다.'); return; }
+    pmFaqState.push({q:'',a:''}); renderPmFaq();
   });
+  document.getElementById('pmF_faqList').addEventListener('click',function(e){
+    var d=e.target.closest('.pmfaq-del'); if(!d) return;
+    pmFaqState.splice(+d.dataset.i,1); renderPmFaq();
+  });
+  document.getElementById('pmF_faqList').addEventListener('input',function(e){
+    var t=e.target;
+    if(t.classList.contains('pmfaq-q')) pmFaqState[+t.dataset.i].q=t.value;
+    else if(t.classList.contains('pmfaq-a')) pmFaqState[+t.dataset.i].a=t.value;
+  });
+  // 획득 자격조건 (층 기반)
+  function pmSyncFloorMax(){
+    var min=document.getElementById('pmF_floorMin').value||'1F';
+    var cur=document.getElementById('pmF_floorMax').value;
+    var opts='<option value="">제한 없음 (이상)</option>';
+    FLOORS.forEach(function(f){ if(FIDX[f]>=FIDX[min]) opts+='<option value="'+f+'"'+(f===cur?' selected':'')+'>'+f+'</option>'; });
+    document.getElementById('pmF_floorMax').innerHTML=opts;
+  }
+  function pmSyncFloorOn(){
+    var on=document.getElementById('pmF_floorOn').checked;
+    document.getElementById('pmF_floorBox').style.opacity=on?'1':'.45';
+    document.getElementById('pmF_floorMin').disabled=!on;
+    document.getElementById('pmF_floorMax').disabled=!on;
+  }
+  document.getElementById('pmF_floorOn').addEventListener('change',pmSyncFloorOn);
+  document.getElementById('pmF_floorMin').addEventListener('change',pmSyncFloorMax);
+  document.getElementById('pmPreview').addEventListener('click',function(){
+    alert('앱 화면 미리보기는 준비 중입니다.');
+  });
+  // 공지사항 에디터
+  (function(){
+    var area=document.getElementById('pmF_noticeRte');
+    area.addEventListener('input',function(){ rteSync('pmF_noticeRte','pmF_noticeText'); });
+    area.addEventListener('blur',function(){ rteSync('pmF_noticeRte','pmF_noticeText'); });
+    var bar=area.parentElement.querySelector('.rte-bar');
+    bar.addEventListener('mousedown',function(e){ if(e.target.closest('button')) e.preventDefault(); });
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('[data-cmd]'); if(!b) return;
+      area.focus();
+      if(b.dataset.cmd==='createLink'){ var u=prompt('연결할 주소를 입력하세요','https://'); if(!u) return; document.execCommand('createLink',false,u); }
+      else document.execCommand(b.dataset.cmd,false,null);
+      rteSync('pmF_noticeRte','pmF_noticeText');
+    });
+  })();
 
   function openPromo(id){
     var p=id?promos.filter(function(x){return x.id===id;})[0]:null;
@@ -4328,68 +4391,31 @@
     document.getElementById('pmTitle').textContent=p?'매장 프로모션 수정':'매장 프로모션 등록';
     document.getElementById('pmSave').textContent=p?'저장':'등록';
     document.getElementById('pmDelete').style.display=p?'':'none';
-    // STEP1
-    document.getElementById('pmF_store').innerHTML='<option value="">매장을 선택하세요</option>'+floor63StoreOptions(p&&p.store?p.store:'');
-    document.getElementById('pmF_badge').value=p&&p.badge?p.badge:'';
-    document.getElementById('pmF_memo').value=p&&p.memo?p.memo:'';
-    // STEP2
-    document.getElementById('pmF_name').value=p?p.name:'';
-    document.getElementById('pmF_sub').value=p&&p.sub?p.sub:'';
-    var ty=p&&p.type?p.type:'할인';
+    // STEP1 : 프로모션 유형
+    var ty=(p&&p.type&&PM_TYPE_LABEL[p.type])?p.type:'coupon';
     document.getElementById('pmF_type').value=ty;
-    document.querySelectorAll('#pmF_typeSeg button').forEach(function(x){x.classList.toggle('on',x.dataset.pt===ty);});
     pmSyncType();
-    // STEP3
-    var dm=p&&p.discMode?p.discMode:'rate';
-    document.getElementById('pmF_discMode').value=dm;
-    document.querySelectorAll('#pmF_discSeg button').forEach(function(x){x.classList.toggle('on',x.dataset.dm===dm);});
-    document.getElementById('pmF_discUnit').textContent=dm==='rate'?'%':'원';
-    document.getElementById('pmF_discVal').value=p&&p.discVal!=null?p.discVal:'';
-    document.getElementById('pmF_discTarget').value=p&&p.discTarget?p.discTarget:'';
-    document.getElementById('pmF_giftText').value=p&&p.giftText?p.giftText:'';
-    document.getElementById('pmF_giftQty').value=p&&p.giftQty!=null?p.giftQty:'';
-    document.getElementById('pmF_bogoText').value=p&&p.bogoText?p.bogoText:'';
-    document.getElementById('pmF_setText').value=p&&p.setText?p.setText:'';
-    document.getElementById('pmF_setPrice').value=p&&p.setPrice!=null?p.setPrice:'';
-    document.getElementById('pmF_expText').value=p&&p.expText?p.expText:'';
-    document.getElementById('pmF_expCap').value=p&&p.expCap!=null?p.expCap:'';
-    document.getElementById('pmF_etcText').value=p&&p.etcText?p.etcText:'';
-    document.getElementById('pmF_cond').value=p&&p.cond?p.cond:'';
-    document.getElementById('pmF_caution').value=p&&p.caution?p.caution:'';
-    // STEP4
-    pmImg=p?p.img:null;
-    document.getElementById('pmImgPreview').innerHTML=pmImg?'<img src="'+pmImg+'" style="width:120px;height:160px;object-fit:cover;border-radius:10px;border:1px solid var(--line)">':'';
-    var bm=p&&p.bodyMode?p.bodyMode:'editor';
-    document.getElementById('pmF_bodyMode').value=bm;
-    document.querySelectorAll('#pmF_bodySeg button').forEach(function(x){x.classList.toggle('on',x.dataset.bm===bm);});
-    document.getElementById('pmF_bodyEditor').style.display=bm==='editor'?'':'none';
-    document.getElementById('pmF_bodyImageBox').style.display=bm==='image'?'':'none';
-    document.getElementById('pmF_bodyText').value=p&&p.bodyText?p.bodyText:'';
-    pmBodyImg=p&&p.bodyImg?p.bodyImg:null;
-    document.getElementById('pmBodyImgPreview').innerHTML=pmBodyImg?'<img src="'+pmBodyImg+'" style="max-width:100%;border-radius:10px;border:1px solid var(--line)">':'';
-    // STEP5
+    fillEventCoupons('pmF_coupon', p&&p.couponName?p.couponName:'');
+    // STEP2 : 개요
+    document.getElementById('pmF_name').value=p?p.name:'';
     document.getElementById('pmF_start').value=p?pmToInput(p.start):'';
     document.getElementById('pmF_end').value=p&&p.end?pmToInput(p.end):'';
-    document.getElementById('pmF_always').checked=p?!!p.always:false;
-    document.getElementById('pmF_end').disabled=p?!!p.always:false;
-    document.getElementById('pmF_limitOn').checked=p?!!p.limitOn:false;
-    document.getElementById('pmF_limitBox').style.display=(p&&p.limitOn)?'':'none';
-    pmDays=(p&&p.days)?p.days.slice():[];
-    document.querySelectorAll('#pmF_dayChips .chip').forEach(function(c){c.classList.toggle('active',pmDays.indexOf(c.dataset.day)>-1);});
-    document.getElementById('pmF_timeFrom').value=p&&p.timeFrom?p.timeFrom:'';
-    document.getElementById('pmF_timeTo').value=p&&p.timeTo?p.timeTo:'';
-    // STEP6
-    fillEventCoupons('pmF_coupon', p&&p.couponName?p.couponName:'');
-    var ac=p&&p.action?p.action:'detail';
-    document.getElementById('pmF_action').value=ac;
-    document.querySelectorAll('#pmF_actSeg button').forEach(function(x){x.classList.toggle('on',x.dataset.ac===ac);});
-    document.querySelectorAll('.pmact').forEach(function(x){x.style.display='none';});
-    document.getElementById('pmA_'+ac).style.display='';
-    document.getElementById('pmF_url').value=p&&p.url?p.url:'';
-    // STEP7
-    document.getElementById('pmF_order').value=p&&p.order!=null?p.order:(promos.length+1);
-    document.getElementById('pmF_show').checked=p?!!p.show:true;
     document.getElementById('pmF_push').checked=p?!!p.push:false;
+    document.getElementById('pmF_store').innerHTML='<option value="">연결 안함</option>'+floor63StoreOptions(p&&p.store?p.store:'');
+    document.getElementById('pmF_show').checked=p?!!p.show:true;
+    // STEP3 : 본문
+    pmThumbs=(p&&p.thumbs)?{main:p.thumbs.main||null,list:p.thumbs.list||null,share:p.thumbs.share||null}:{main:null,list:null,share:null};
+    renderPmThumbs();
+    rteSet('pmF_bodyRte','pmF_bodyText', p?(p.bodyText||''):'');
+    pmFaqState=(p&&Array.isArray(p.faq))?JSON.parse(JSON.stringify(p.faq)):[];
+    renderPmFaq();
+    rteSet('pmF_noticeRte','pmF_noticeText', p?(typeof p.notice==='string'?p.notice:''):'');
+    // STEP4 : 획득 자격조건
+    document.getElementById('pmF_floorMin').innerHTML=evFloorOptions(p&&p.floorMin?p.floorMin:'1F');
+    pmSyncFloorMax();
+    document.getElementById('pmF_floorMax').value=p&&p.floorMax?p.floorMax:'';
+    document.getElementById('pmF_floorOn').checked=!!(p&&p.floorMin);
+    pmSyncFloorOn();
     document.getElementById('pmF_err').textContent='';
     document.getElementById('promoModal').classList.add('open');
     document.querySelector('#promoModal .modal-body').scrollTop=0;
@@ -4399,68 +4425,49 @@
   document.getElementById('pmSave').addEventListener('click',function(){
     var err=document.getElementById('pmF_err');
     var V=function(id){return document.getElementById(id).value.trim();};
-    var N=function(id){var v=document.getElementById(id).value; return v!==''?+v:null;};
-    var store=V('pmF_store');
-    if(!store){ err.textContent='프로모션을 진행할 매장을 선택하세요.'; return; }
-    var name=V('pmF_name');
-    if(!name){ err.textContent='프로모션명을 입력하세요.'; return; }
     var ty=document.getElementById('pmF_type').value;
-    var d={type:ty,discMode:null,discVal:null,discTarget:null,giftText:null,giftQty:null,bogoText:null,setText:null,setPrice:null,expText:null,expCap:null,etcText:null};
-    if(ty==='할인'){
-      d.discMode=document.getElementById('pmF_discMode').value;
-      d.discVal=N('pmF_discVal'); d.discTarget=V('pmF_discTarget')||null;
-      if(d.discVal==null||d.discVal<=0){ err.textContent='할인 값을 입력하세요.'; return; }
-      if(d.discMode==='rate' && d.discVal>100){ err.textContent='정률 할인은 100%를 넘을 수 없습니다.'; return; }
-    } else if(ty==='증정/사은품'){
-      d.giftText=V('pmF_giftText')||null; d.giftQty=N('pmF_giftQty');
-      if(!d.giftText){ err.textContent='증정품 내용을 입력하세요.'; return; }
-    } else if(ty==='1+1'){
-      d.bogoText=V('pmF_bogoText')||null;
-      if(!d.bogoText){ err.textContent='1+1 대상 품목을 입력하세요.'; return; }
-    } else if(ty==='세트/패키지'){
-      d.setText=V('pmF_setText')||null; d.setPrice=N('pmF_setPrice');
-      if(!d.setText){ err.textContent='세트 구성을 입력하세요.'; return; }
-    } else if(ty==='체험/무료'){
-      d.expText=V('pmF_expText')||null; d.expCap=N('pmF_expCap');
-      if(!d.expText){ err.textContent='체험 내용을 입력하세요.'; return; }
-    } else {
-      d.etcText=V('pmF_etcText')||null;
-      if(!d.etcText){ err.textContent='혜택 내용을 입력하세요.'; return; }
+    var couponName=null;
+    if(ty==='coupon'){
+      couponName=document.getElementById('pmF_coupon').value||null;
+      if(!couponName){ err.textContent='제공할 쿠폰을 선택하세요.'; return; }
     }
-    if(!pmImg){ err.textContent='카드 이미지를 등록하세요.'; return; }
-    var bm=document.getElementById('pmF_bodyMode').value;
-    var bodyText=V('pmF_bodyText');
-    if(bm==='editor' && !bodyText){ err.textContent='상세 본문을 입력하세요.'; return; }
-    if(bm==='image' && !pmBodyImg){ err.textContent='상세 이미지를 등록하세요.'; return; }
-    var always=document.getElementById('pmF_always').checked;
-    var sVal=document.getElementById('pmF_start').value, eVal=always?'':document.getElementById('pmF_end').value;
+    var name=V('pmF_name');
+    if(!name){ err.textContent='프로모션 명을 입력하세요.'; return; }
+    var sVal=document.getElementById('pmF_start').value, eVal=document.getElementById('pmF_end').value;
     if(!sVal){ err.textContent='프로모션 시작 일시를 입력하세요.'; return; }
-    if(!always && !eVal){ err.textContent='프로모션 종료 일시를 입력하거나 상시 진행을 체크하세요.'; return; }
-    if(!always && eVal && new Date(eVal)<new Date(sVal)){ err.textContent='종료 일시는 시작 일시 이후여야 합니다.'; return; }
-    var limitOn=document.getElementById('pmF_limitOn').checked;
-    if(limitOn && !pmDays.length){ err.textContent='적용 요일을 1개 이상 선택하세요.'; return; }
-    var ac=document.getElementById('pmF_action').value;
-    var couponName=null, url='';
-    if(ac==='coupon'){ couponName=document.getElementById('pmF_coupon').value||null; if(!couponName){ err.textContent='연결할 쿠폰을 선택하세요.'; return; } }
-    if(ac==='url'){ url=V('pmF_url'); if(!url){ err.textContent='이동 링크를 입력하세요.'; return; } }
+    if(!eVal){ err.textContent='프로모션 종료 일시를 입력하세요.'; return; }
+    if(new Date(eVal)<new Date(sVal)){ err.textContent='종료 일시는 시작 일시 이후여야 합니다.'; return; }
+    if(!pmThumbs.main){ err.textContent='① 상세 페이지 상단 대표 이미지를 등록하세요.'; return; }
+    if(!pmThumbs.list){ err.textContent='② 매장 프로모션 리스트 이미지를 등록하세요.'; return; }
+    rteSync('pmF_bodyRte','pmF_bodyText'); rteSync('pmF_noticeRte','pmF_noticeText');
+    var bodyText=V('pmF_bodyText');
+    if(!bodyText){ err.textContent='프로모션 본문을 입력하세요.'; return; }
 
-    var data={store:store,badge:V('pmF_badge')||null,memo:V('pmF_memo')||null,
-      name:name,sub:V('pmF_sub')||'',
-      cond:V('pmF_cond')||null,caution:V('pmF_caution')||null,
-      img:pmImg,bodyMode:bm,bodyText:bodyText,bodyImg:pmBodyImg||null,
-      start:sVal,end:always?null:eVal,always:always,
-      limitOn:limitOn,days:limitOn?pmDays.slice():[],timeFrom:limitOn?document.getElementById('pmF_timeFrom').value:'',timeTo:limitOn?document.getElementById('pmF_timeTo').value:'',
-      action:ac,couponName:couponName,url:url,
-      order:N('pmF_order')||(promos.length+1),
+    var floorOn=document.getElementById('pmF_floorOn').checked;
+    var floorMin=floorOn?(document.getElementById('pmF_floorMin').value||null):null;
+    var floorMax=floorOn?(document.getElementById('pmF_floorMax').value||null):null;
+    if(floorOn && !floorMin){ err.textContent='최소 층을 선택하세요.'; return; }
+    if(floorMin && floorMax && FIDX[floorMax]<FIDX[floorMin]){ err.textContent='최대 층은 최소 층보다 같거나 높아야 합니다.'; return; }
+    var plain=rteText(document.getElementById('pmF_bodyRte')).replace(/\s+/g,' ');
+    var data={type:ty,couponName:couponName,
+      name:name, sub:plain.length>40?plain.slice(0,40)+'…':plain,
+      store:V('pmF_store')||null,
+      thumbs:{main:pmThumbs.main,list:pmThumbs.list,share:pmThumbs.share},
+      img:pmThumbs.list,
+      bodyText:bodyText,
+      faq:pmFaqState.filter(function(f){return (f.q&&f.q.trim())||(f.a&&f.a.trim());}).map(function(f){return {q:(f.q||'').trim(),a:(f.a||'').trim()};}),
+      notice:V('pmF_noticeText'),
+      start:sVal, end:eVal,
+      floorMin:floorMin, floorMax:floorMax,
       show:document.getElementById('pmF_show').checked,
       push:document.getElementById('pmF_push').checked,
-      st:pmCalcStatus(sVal,eVal,always)};
-    Object.keys(d).forEach(function(k){ data[k]=d[k]; });
+      st:pmCalcStatus(sVal,eVal)};
 
+    err.textContent='';
     if(pmCurId){ var p=promos.filter(function(x){return x.id===pmCurId;})[0]; if(p) Object.keys(data).forEach(function(k){p[k]=data[k];}); }
     else { data.id='pm'+Date.now(); data.views=0; promos.push(data); }
     pagerPromo.draw(); closePromo();
-    alert((pmCurId?'매장 프로모션이 수정':'매장 프로모션이 등록')+'되었습니다.'+(data.push?'\n시작 시점에 앱푸시가 자동 발송됩니다.':''));
+    alert((pmCurId?'매장 프로모션이 수정':'매장 프로모션이 등록')+'되었습니다.'+(data.push?'\n오픈 시점에 앱푸시가 자동 발송됩니다.':''));
   });
   document.getElementById('pmDelete').addEventListener('click',function(){
     if(!pmCurId) return;
